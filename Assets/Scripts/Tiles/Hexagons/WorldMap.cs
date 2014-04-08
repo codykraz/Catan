@@ -9,6 +9,7 @@ public class WorldMap : MonoBehaviour {
 	public int mapHeight;
 
 	public List<TileType> board;
+	public List<int> numbers;
 
     protected Dictionary<Vector2, Hex> hexes { get; set; }
 
@@ -28,6 +29,22 @@ public class WorldMap : MonoBehaviour {
 		return list;
 	}
 
+	List<int> Shuffle(List<int> list)  
+	{  
+		for (int i = 0; i < 10; i++) {
+			System.Random rng = new System.Random ();  
+			int n = list.Count;  
+			while (n > 1) {  
+				n--;  
+				int k = rng.Next (n + 1);  
+				int value = list [k];  
+				list [k] = list [n];  
+				list [n] = value;  
+			}  
+		}
+		return list;
+	}
+
 	void Start () {
 		board = new List<TileType> {
 			TileType.Desert,
@@ -37,9 +54,16 @@ public class WorldMap : MonoBehaviour {
 			TileType.Sheep,TileType.Sheep,TileType.Sheep,TileType.Sheep,
 			TileType.Wheat,TileType.Wheat,TileType.Wheat,TileType.Wheat
 		};
+
+		numbers = new List<int> {
+			2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12
+		};
+
 		int hexCount = 0;
+		int numCount = 0;
         hexes = new Dictionary<Vector2, Hex>();
 		board = Shuffle (board);
+		numbers = Shuffle (numbers);
 		for (int y = 0; y < mapHeight; y++) {
 		    for (int x = 0; x < mapWidth; x++) {
 				if (((x==0 || x==4) && (y==0||y==4)) || (x==4 &&  (y==1||y==3))) continue;
@@ -47,13 +71,22 @@ public class WorldMap : MonoBehaviour {
 	            Vector3 pos = ToPixel(position);
 
 	            GameObject hexObject = new GameObject();
+
+				if (board[hexCount] != TileType.Desert){
+					GameObject tile = (GameObject)Instantiate(Resources.Load(numbers[numCount].ToString()));
+					tile.transform.parent = this.transform;
+					tile.transform.position = pos+ new Vector3(0,1,0);
+				}
+
 				hexObject.transform.localPosition = pos;
 				hexObject.transform.parent = this.transform;
 				hexObject.AddComponent("Hex");
-
 	            Hex hex = hexObject.GetComponent<Hex>();
 	            hex.hexPosition = position;
-	            hex.InitializeModel(board[hexCount]);
+
+				if (board[hexCount] != TileType.Desert)
+					hex.InitializeModel(board[hexCount], numbers[numCount++]);
+				else hex.InitializeModel(board[hexCount], 0);
 
 	            hexes.Add(position, hex);
 				hexCount++;

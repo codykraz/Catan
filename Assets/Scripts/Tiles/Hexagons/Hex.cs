@@ -7,13 +7,13 @@ public class Hex : MonoBehaviour {
     public Vector2 hexPosition;
     public HexModel hexModel { get; set; }
 	public TileType tileType;
-
+	private int tileVal;
 	protected Tile tileScript;
 
 	protected MeshRenderer meshRenderer;
 	protected MeshCollider meshCollider;
 
-	public void InitializeModel(TileType t) {
+	public void InitializeModel(TileType t, int value) {
 		gameObject.name = "Hex";
 		gameObject.AddComponent("HexModel");
         hexModel = GetComponent<HexModel>();
@@ -21,6 +21,7 @@ public class Hex : MonoBehaviour {
 
 		meshRenderer = GetComponent<MeshRenderer>();
 		meshCollider = GetComponent<MeshCollider>();
+		tileVal = value;
 
 		SetTileType(t);
     }
