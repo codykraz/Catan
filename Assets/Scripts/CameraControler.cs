@@ -16,7 +16,7 @@ public class CameraControler : MonoBehaviour
 
 	private float zoomSpeed = 4;
 
-	private float minPinchSpeed = 10;
+	private float minPinchSpeed = 40;
 
 	void Awake()
 	{
@@ -38,7 +38,7 @@ public class CameraControler : MonoBehaviour
 
 			this.transform.position = position;
 		}
-		else if(Input.touchCount >= 2 && Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved)
+		else if(Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved)
 		{
 			float touch0Speed = Input.GetTouch(0).deltaPosition.magnitude / Input.GetTouch(0).deltaTime;
 			float touch1Speed = Input.GetTouch(1).deltaPosition.magnitude / Input.GetTouch(1).deltaTime;
@@ -54,10 +54,19 @@ public class CameraControler : MonoBehaviour
 				{
 					this.camera.fieldOfView = Mathf.Clamp(this.camera.fieldOfView + zoomSpeed, fovMin, fovMax);
 				}
-				else if(deltaTouch + 20 > 1)
+				else if(deltaTouch > 1)
 				{
 					this.camera.fieldOfView = Mathf.Clamp(this.camera.fieldOfView - zoomSpeed, fovMin, fovMax);
 				}
+
+				Vector3 position = this.transform.position;
+
+				float multiplier = (fovMax - camera.fieldOfView) / (fovMax - fovMin);
+				
+				position.x = Mathf.Clamp(position.x, xCenter - (xRange * multiplier), xCenter + (xRange * multiplier));
+				position.z = Mathf.Clamp(position.z, zCenter - (zRange * multiplier), zCenter + (zRange * multiplier));
+				
+				this.transform.position = position;
 			}
 		}
 	}
