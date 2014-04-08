@@ -3,11 +3,6 @@ using System.Collections;
 
 public class ScoreGUI : MonoBehaviour {
 	int current_player_score = 0;
-	Texture AMan;
-
-	void Start() {
-		AMan = Resources.Load ("A-Man", typeof(Texture)) as Texture;
-	}
 
 	void OnGUI () {
 		current_player_score+=1;
