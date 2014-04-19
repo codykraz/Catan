@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CameraControler : MonoBehaviour
 {
+	public GameObject selectedObject = null;
+
 	private float panSpeed = .1f;
 
 	private float xCenter = 27.5f;
@@ -67,6 +69,20 @@ public class CameraControler : MonoBehaviour
 				position.z = Mathf.Clamp(position.z, zCenter - (zRange * multiplier), zCenter + (zRange * multiplier));
 				
 				this.transform.position = position;
+			}
+		}
+		else if(Input.touchCount == 1)
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+			RaycastHit hit;
+			if(Physics.Raycast(ray, out hit))
+			{
+				if(hit.transform.CompareTag("Settlement")
+				   || hit.transform.CompareTag("City")
+				   || hit.transform.CompareTag("Road"))
+				{
+					selectedObject = hit.transform.gameObject;
+				}
 			}
 		}
 	}
