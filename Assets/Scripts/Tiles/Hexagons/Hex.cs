@@ -9,6 +9,7 @@ public class Hex : MonoBehaviour {
 	public TileType tileType;
 	private int tileVal;
 	protected Tile tileScript;
+	public bool blocked = false;
 
 	protected MeshRenderer meshRenderer;
 	protected MeshCollider meshCollider;
@@ -40,6 +41,10 @@ public class Hex : MonoBehaviour {
 		Tile script = GameObjectManager.GetTileScript(type.ToString());
 		if (script != null)
 			tileScript = script;
+	}
+	
+	public void Rolled(){
+		
 	}
 
 }
