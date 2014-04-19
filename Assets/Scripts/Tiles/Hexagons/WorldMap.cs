@@ -13,7 +13,7 @@ public class WorldMap : MonoBehaviour {
 
     protected Dictionary<Vector2, Hex> hexes { get; set; }
 
-	List<TileType> Shuffle(List<TileType> list)  
+	void Shuffle(ref List<TileType> list)  
 	{  
 		for (int i = 0; i < 10; i++) {
 						System.Random rng = new System.Random ();  
@@ -26,10 +26,9 @@ public class WorldMap : MonoBehaviour {
 								list [n] = value;  
 						}  
 				}
-		return list;
 	}
 
-	List<int> Shuffle(List<int> list)  
+	void Shuffle(ref List<int> list)  
 	{  
 		for (int i = 0; i < 10; i++) {
 			System.Random rng = new System.Random ();  
@@ -62,8 +61,8 @@ public class WorldMap : MonoBehaviour {
 		int hexCount = 0;
 		int numCount = 0;
         hexes = new Dictionary<Vector2, Hex>();
-		board = Shuffle (board);
-		numbers = Shuffle (numbers);
+		Shuffle (board);
+		Shuffle (numbers);
 		for (int y = 0; y < mapHeight; y++) {
 		    for (int x = 0; x < mapWidth; x++) {
 				if (((x==0 || x==4) && (y==0||y==4)) || (x==4 &&  (y==1||y==3))) continue;
@@ -94,6 +93,10 @@ public class WorldMap : MonoBehaviour {
 
 		    }
 		}
+
+
+
+		
 	}
 
 	public List<Vector2> GetNeighbors(int x, int y) {
