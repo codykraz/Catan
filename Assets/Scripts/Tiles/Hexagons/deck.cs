@@ -15,7 +15,7 @@ public class deck : MonoBehaviour
 			while (n > 1) {  
 				n--;  
 				int k = rng.Next (n + 1);  
-				devCard value = list [k];  
+				DevCard value = list [k];  
 				list [k] = list [n];  
 				list [n] = value;  
 			}  
@@ -27,37 +27,39 @@ public class deck : MonoBehaviour
 	void Awake ()
 	{
 		cards = new List<DevCard>{
-			RoadBuilding,RoadBuilding,
+			DevCard.RoadBuilding,DevCard.RoadBuilding,
 			
-			YearOfPlenty,YearOfPlenty,
-			Monopoly, Monopoly,
-			Victory,Victory,Victory,Victory,Victory,
-			Knight,Knight,Knight,Knight,Knight,Knight,Knight,Knight,Knight,Knight,Knight,Knight,Knight,Knight
+			DevCard.YearOfPlenty,DevCard.YearOfPlenty,
+			DevCard.Monopoly, DevCard.Monopoly,
+			DevCard.Victory,DevCard.Victory,DevCard.Victory,DevCard.Victory,DevCard.Victory,
+			DevCard.Knight,DevCard.Knight,DevCard.Knight,DevCard.Knight,DevCard.Knight,
+			DevCard.Knight,DevCard.Knight,DevCard.Knight,DevCard.Knight,DevCard.Knight,
+			DevCard.Knight,DevCard.Knight,DevCard.Knight,DevCard.Knight
 		};
 		
-		Shuffle(cards);
+		Shuffle(ref cards);
 	}
 	
 	public DevCard draw(){
 		if (curCard >= 25) {
 			GameObject.Find(GameObject.Find("TurnController").GetComponent<TurnControllerScript>().currentPlayer).GetComponent<PlayerScript>().knightDevCard++;
-			return Knight;
+			return DevCard.Knight;
 		}
 		
 		switch (cards[curCard]){
-			case Knight:
+			case DevCard.Knight:
 				GameObject.Find(GameObject.Find("TurnController").GetComponent<TurnControllerScript>().currentPlayer).GetComponent<PlayerScript>().knightDevCard++;
 				break;
-			case Victory:
+			case DevCard.Victory:
 				GameObject.Find(GameObject.Find("TurnController").GetComponent<TurnControllerScript>().currentPlayer).GetComponent<PlayerScript>().victoryDevCard++;
 				break;
-			case Monopoly:
+			case DevCard.Monopoly:
 				GameObject.Find(GameObject.Find("TurnController").GetComponent<TurnControllerScript>().currentPlayer).GetComponent<PlayerScript>().monopolyDevCard++;
 				break;
-			case YearOfPlenty:
+			case DevCard.YearOfPlenty:
 				GameObject.Find(GameObject.Find("TurnController").GetComponent<TurnControllerScript>().currentPlayer).GetComponent<PlayerScript>().yearOfPlentyDevCard++;
 				break;
-			case RoadBuilding:
+			case DevCard.RoadBuilding:
 				GameObject.Find(GameObject.Find("TurnController").GetComponent<TurnControllerScript>().currentPlayer).GetComponent<PlayerScript>().roadBuildingDevCard++;
 				break;
 			default:

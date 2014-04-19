@@ -41,7 +41,6 @@ public class WorldMap : MonoBehaviour {
 				list [n] = value;  
 			}  
 		}
-		return list;
 	}
 
 	void Awake () {
@@ -61,8 +60,8 @@ public class WorldMap : MonoBehaviour {
 		int hexCount = 0;
 		int numCount = 0;
         hexes = new Dictionary<Vector2, Hex>();
-		Shuffle (board);
-		Shuffle (numbers);
+		Shuffle (ref board);
+		Shuffle (ref numbers);
 		for (int y = 0; y < mapHeight; y++) {
 		    for (int x = 0; x < mapWidth; x++) {
 				if (((x==0 || x==4) && (y==0||y==4)) || (x==4 &&  (y==1||y==3))) continue;
