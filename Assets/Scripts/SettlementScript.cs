@@ -64,6 +64,7 @@ public class SettlementScript : MonoBehaviour
 			
 			player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
 			this.renderer.material.color = player.playerColor;
+			this.renderer.enabled = true;
 			
 			this.nearbySettlement = true;
 			this.hasOwner = true;
@@ -111,11 +112,33 @@ public class SettlementScript : MonoBehaviour
 	{
 		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, LayerMask.NameToLayer("Port"));
 
-		if(colliders.Length > 0)
+		foreach(Collider coll in colliders)
 		{
-			foreach(Collider coll in colliders)
+			coll.GetComponent<PortScript>().takeControl();
+		}
+	}
+
+	private void updateRoads()
+	{
+		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, LayerMask.NameToLayer("Port"));
+
+		foreach(Collider coll in colliders)
+		{
+			if(turnController.currentPlayer == "Player1")
 			{
-				coll.GetComponent<PortScript>().takeControl();
+				coll.GetComponent<RoadScript>().Player1CanBuildHere = true;
+			}
+			else if(turnController.currentPlayer == "Player2")
+			{
+				coll.GetComponent<RoadScript>().Player2CanBuildHere = true;
+			}
+			else if(turnController.currentPlayer == "Player3")
+			{
+				coll.GetComponent<RoadScript>().Player3CanBuildHere = true;
+			}
+			else if(turnController.currentPlayer == "Player4")
+			{
+				coll.GetComponent<RoadScript>().Player4CanBuildHere = true;
 			}
 		}
 	}
