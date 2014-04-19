@@ -3,60 +3,25 @@ using System.Collections;
 
 public class CityScript : MonoBehaviour
 {
-	public bool Player1CanBuildHere = false;
-	public bool Player2CanBuildHere = false;
-	public bool Player3CanBuildHere = false;
-	public bool Player4CanBuildHere = false;
-
-	private bool hasOwner = false;
-	
 	private PlayerScript player;
-	
 	private TurnControllerScript turnController;
 
-	void Awake()
+	void Start()
 	{
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
-	}
-	
-	public bool build()
-	{
-		if(turnController.currentPlayer == "Player1" && Player1CanBuildHere == true
-		   || turnController.currentPlayer == "Player2" && Player2CanBuildHere == true
-		   || turnController.currentPlayer == "Player3" && Player3CanBuildHere == true
-		   || turnController.currentPlayer == "Player4" && Player4CanBuildHere == true)
-		{
-			
-			player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
-			this.renderer.material.color = player.playerColor;
+		player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
+		player.renderer.material.color = player.playerColor;
 
-			this.hasOwner = true;
+		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 4, LayerMask.NameToLayer ("Settlement"));
 
+		player.citiesUsed++;
+		player.settlementsUsed--;
 
-
-
-
-
-
-
-
-
-
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		Destroy(colliders[0].gameObject);
 	}
 
 	public void Rolled(TileType tileType)
-	{
-		if(this.hasOwner == false)
-		{
-			return;
-		}
-		
+	{		
 		if(tileType == TileType.Brick)
 		{
 			player.brick += 2;

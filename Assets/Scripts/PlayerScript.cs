@@ -20,11 +20,11 @@ public class PlayerScript : MonoBehaviour
 	public int largestArmyCount = 0;
 
 	public int citiesUsed = 0;
-	private int maxCities = 4;
+	public int maxCities = 4;
 	public int settlementsUsed = 0;
-	private int maxSettlements = 5;
+	public int maxSettlements = 5;
 	public int roadsUsed = 0;
-	private int maxRoads = 15;
+	public int maxRoads = 15;
 
 	public int brickTradeIn = 4;
 	public int wheatTradeIn = 4;
@@ -39,4 +39,19 @@ public class PlayerScript : MonoBehaviour
 	public int knightDevCard = 0;
 
 	public string lastDevCardRecieved = "";
+
+	void Update()
+	{
+		victoryPoints = settlementsUsed + citiesUsed * 2 + victoryDevCard;
+
+		if(hasLargestArmy == true)
+		{
+			victoryPoints += 2;
+		}
+
+		if(hasLongestRoad == true)
+		{
+			victoryPoints += 2;
+		}
+	}
 }
