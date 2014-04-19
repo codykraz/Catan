@@ -10,7 +10,7 @@ public class ActionsDialog : MonoBehaviour {
 
 	public static bool show_act = false;
 	
-	void Start() {		
+	void Start() {
 	}
 	
 	// Use this for initialization
@@ -36,7 +36,8 @@ public class ActionsDialog : MonoBehaviour {
 		}
 		if(GUILayout.Button("Exchange Resource", GUILayout.Height (Screen.height* 3 /25)))
 		{
-			//Exchange();
+			ExchangeDialog.show();
+			hide ();
 		}
 		if(GUILayout.Button("Play Development Card", GUILayout.Height (Screen.height* 3 /25)))
 		{
