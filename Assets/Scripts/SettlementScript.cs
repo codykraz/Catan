@@ -30,6 +30,7 @@ public class SettlementScript : MonoBehaviour
 
 		player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
 		this.renderer.material.color = player.playerColor;
+		player.settlementsUsed++;
 
 		this.nearbySettlement = true;
 		this.hasOwner = true;
@@ -56,23 +57,26 @@ public class SettlementScript : MonoBehaviour
 		   || turnController.currentPlayer == "Player3" && Player3CanBuildHere == true
 		   || turnController.currentPlayer == "Player4" && Player4CanBuildHere == true)
 		{
+			
+			player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
+			this.renderer.material.color = player.playerColor;
+			
+			this.nearbySettlement = true;
+			this.hasOwner = true;
+			
+			Collider[] colliders = Physics.OverlapSphere(this.transform.position, 12, LayerMask.NameToLayer("Settlement"));
+			
+			foreach(Collider coll in colliders)
+			{
+				coll.GetComponent<SettlementScript>().nearbySettlement = true;
+			}
 
-
-
-
-
-
-
-
-
-
-
-
-
+			return true;
 		}
-
-
-		return true;
+		else
+		{
+			return false;
+		}
 	}
 	
 	public void Rolled(TileType tileType)

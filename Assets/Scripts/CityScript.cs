@@ -3,42 +3,53 @@ using System.Collections;
 
 public class CityScript : MonoBehaviour
 {
-	public bool canBuildHere = true;
-	
+	public bool Player1CanBuildHere = false;
+	public bool Player2CanBuildHere = false;
+	public bool Player3CanBuildHere = false;
+	public bool Player4CanBuildHere = false;
+
 	private bool hasOwner = false;
 	
 	private PlayerScript player;
 	
 	private TurnControllerScript turnController;
-	
+
 	void Awake()
 	{
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
 	}
 	
-	public bool buildInitial()
+	public bool build()
 	{
-		if(this.canBuildHere == false)
+		if(turnController.currentPlayer == "Player1" && Player1CanBuildHere == true
+		   || turnController.currentPlayer == "Player2" && Player2CanBuildHere == true
+		   || turnController.currentPlayer == "Player3" && Player3CanBuildHere == true
+		   || turnController.currentPlayer == "Player4" && Player4CanBuildHere == true)
+		{
+			
+			player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
+			this.renderer.material.color = player.playerColor;
+
+			this.hasOwner = true;
+
+
+
+
+
+
+
+
+
+
+
+			return true;
+		}
+		else
 		{
 			return false;
 		}
-		
-		player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
-		this.renderer.material.color = player.playerColor;
-		
-		this.canBuildHere = false;
-		this.hasOwner = true;
-		
-		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 12, LayerMask.NameToLayer("City"));
-		
-		foreach(Collider coll in colliders)
-		{
-			coll.GetComponent<CityScript>().canBuildHere = false;
-		}
-		
-		return true;
 	}
-	
+
 	public void Rolled(TileType tileType)
 	{
 		if(this.hasOwner == false)
