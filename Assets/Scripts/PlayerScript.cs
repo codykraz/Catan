@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour
 {
+	public Color playerColor = Color.black;
+
 	public int victoryPoints = 0;
 
 	public int brick = 0;

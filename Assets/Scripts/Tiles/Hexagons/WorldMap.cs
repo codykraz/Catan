@@ -45,7 +45,7 @@ public class WorldMap : MonoBehaviour {
 		return list;
 	}
 
-	void Start () {
+	void Awake () {
 		board = new List<TileType> {
 			TileType.Desert,
 			TileType.Brick,TileType.Brick,TileType.Brick,
@@ -76,6 +76,7 @@ public class WorldMap : MonoBehaviour {
 					GameObject tile = (GameObject)Instantiate(Resources.Load(numbers[numCount].ToString()));
 					tile.transform.parent = this.transform;
 					tile.transform.position = pos+ new Vector3(0,1,0);
+					hexObject.tag = numbers[numCount].ToString();
 				}
 
 				hexObject.transform.localPosition = pos;
