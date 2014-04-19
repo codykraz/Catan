@@ -46,23 +46,23 @@ public class CityScript : MonoBehaviour
 			return;
 		}
 		
-		if(tileType == Brick)
+		if(tileType == TileType.Brick)
 		{
 			player.brick += 2;
 		}
-		else if(tileType == Wood)
+		else if(tileType == TileType.Wood)
 		{
 			player.wood += 2;
 		}
-		else if(tileType == Ore)
+		else if(tileType == TileType.Ore)
 		{
 			player.ore += 2;
 		}
-		else if(tileType == Sheep)
+		else if(tileType == TileType.Sheep)
 		{
 			player.sheep += 2;
 		}
-		else if(tileType == Wheat)
+		else if(tileType == TileType.Wheat)
 		{
 			player.wheat += 2;
 		}

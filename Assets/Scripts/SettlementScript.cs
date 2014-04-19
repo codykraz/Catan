@@ -82,23 +82,23 @@ public class SettlementScript : MonoBehaviour
 			return;
 		}
 
-		if(tileType == Brick)
+		if(tileType == TileType.Brick)
 		{
 			player.brick++;
 		}
-		else if(tileType == Wood)
+		else if(tileType == TileType.Wood)
 		{
 			player.wood++;
 		}
-		else if(tileType == Ore)
+		else if(tileType == TileType.Ore)
 		{
 			player.ore++;
 		}
-		else if(tileType == Sheep)
+		else if(tileType == TileType.Sheep)
 		{
 			player.sheep++;
 		}
-		else if(tileType == Wheat)
+		else if(tileType == TileType.Wheat)
 		{
 			player.wheat++;
 		}
