@@ -10,7 +10,10 @@ public class Hex : MonoBehaviour {
 	private int tileVal;
 	protected Tile tileScript;
 	public bool blocked = false;
-
+	private int settlementObjects = 0;
+	private GameObject[] settlements = new GameObject[6];
+	
+	
 	protected MeshRenderer meshRenderer;
 	protected MeshCollider meshCollider;
 
@@ -43,7 +46,18 @@ public class Hex : MonoBehaviour {
 			tileScript = script;
 	}
 	
+	public void addSettlement(GameObject settlement){
+		settlements[settlementObjects] = settlement;
+		settlementObjects++;
+		
+	}
+	
 	public void Rolled(){
+		if (!blocked){
+			for (int i = 0; i < settlementObjects; i++){
+				settlements[i].GetComponent<SettlementScript>().Rolled(tileType);
+			}
+		}
 		
 	}
 
