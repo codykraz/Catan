@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ExchangeDialog : MonoBehaviour {
 	int exc_winID = 2014;
+	int res_alert_winID = 9102;
 	PlayerScript current_player;
 
 	string give_resource;
@@ -21,6 +22,7 @@ public class ExchangeDialog : MonoBehaviour {
 	private TurnControllerScript turnController;
 	
 	public static bool show_exc = false;
+	public static bool res_alert_exc = false;
 	
 	void Start() {
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
@@ -42,10 +44,12 @@ public class ExchangeDialog : MonoBehaviour {
 	void OnGUI () {
 		//Background
 		if (show_exc){
-			GUI.ModalWindow (exc_winID, new Rect (Screen.width / 10, Screen.height *9/ 30, Screen.width * 4 / 5, Screen.height * 6 / 15), ModalContents, "Exchange");
+			GUI.ModalWindow (exc_winID, new Rect (Screen.width / 10, Screen.height *8/ 30, Screen.width * 4 / 5, Screen.height * 7 / 15), ModalContents, "Exchange");
+		}
+		if(res_alert_exc){
+			GUI.ModalWindow (res_alert_winID, new Rect (Screen.width / 5, Screen.height / 6, Screen.width * 3 / 5, Screen.height *2/ 3), ResAlrtContents, "Not Enough Resources");	
 		}
 	}
-	
 	void ModalContents (int windowID)
 	{
 		GUILayout.BeginArea (new Rect (Screen.width / 10, Screen.height/23, Screen.width * 3 / 5, Screen.height * 6 / 15));
@@ -219,24 +223,29 @@ public class ExchangeDialog : MonoBehaviour {
 					break;
 				default:
 					break;
-				}			
-
-				hide();
-				
-				give_resource = "Wood";
-				take_resource = "Brick";
-				
-				give_resource_tex = GameObjectManager.GetTileTexture ("Wood");
-				take_resource_tex = GameObjectManager.GetTileTexture ("Brick");
-				multiplier = current_player.woodTradeIn;
-				
-				stake = "0";
-				sgive = "0";
-				
-				itake = 0;
-				igive = 0;
+				}
+			}
+			else{
+			
+				res_alert_exc = true;
+			
 			}
 
+			hide();
+			
+			give_resource = "Wood";
+			take_resource = "Brick";
+			
+			give_resource_tex = GameObjectManager.GetTileTexture ("Wood");
+			take_resource_tex = GameObjectManager.GetTileTexture ("Brick");
+			multiplier = current_player.woodTradeIn;
+			
+			stake = "0";
+			sgive = "0";
+			
+			itake = 0;
+			igive = 0;
+			
 		}
 		if (GUILayout.Button ("Cancel", GUILayout.Height (Screen.height*7/96))) {
 			hide();
@@ -265,5 +274,22 @@ public class ExchangeDialog : MonoBehaviour {
 	
 	public static void hide (){
 		show_exc = false;
+	}
+
+	void ResAlrtContents (int windowID)
+	{
+		GUILayout.BeginArea (new Rect (Screen.width / 10, Screen.height* 2 / 27, Screen.width * 2 / 5, Screen.height* 14 / 27));
+		GUILayout.BeginVertical ();
+
+		GUILayout.Space (Screen.width*5 / 27);
+		GUILayout.Label ("You do not possess enough of the selected resource!");
+		GUILayout.Space (Screen.width*1/27);
+		if(GUILayout.Button("Continue",GUILayout.Height (Screen.height*7/96)))
+		{
+			res_alert_exc = false;
+		}
+
+		GUILayout.EndVertical ();
+		GUILayout.EndArea ();
 	}
 }
