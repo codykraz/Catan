@@ -28,7 +28,8 @@ public class ActionsDialog : MonoBehaviour {
 
 		if(GUILayout.Button("Build", GUILayout.Height (Screen.height* 3 /25)))
 		{
-			//Build();
+			BuildDialog.show();
+			hide ();
 		}
 		if(GUILayout.Button("Trade with Player", GUILayout.Height (Screen.height* 3 /25)))
 		{
