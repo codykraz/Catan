@@ -44,55 +44,30 @@ public class ScoreGUI : MonoBehaviour {
 	}
 
 	void OnGUI () {
-		// Resources on top left of screen
-		float resources_box_width = Screen.width*3/4;
-		float resources_box_unit = resources_box_width/26;
 
-		//GUI.Box (new Rect (-5,-5,Screen.width+10,resources_box_unit*6+10), "");
+		GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height / 10));
+		GUILayout.BeginHorizontal();
 
-		GUI.Label (new Rect (resources_box_unit*1, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Wood"));
-		GUI.Label (new Rect (resources_box_unit*1, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.wood.ToString());
+		GUILayout.Space(10);
 
-		GUI.Label (new Rect (resources_box_unit*6, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Ore"));
-		GUI.Label (new Rect (resources_box_unit*6, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.ore.ToString());
+		GUILayout.Label(GameObjectManager.GetTileTexture("Wood"), GUILayout.Width(30));
+		GUILayout.Label(currentPlayer.wood.ToString());
+		GUILayout.Label(GameObjectManager.GetTileTexture("Ore"), GUILayout.Width(30));
+		GUILayout.Label(currentPlayer.ore.ToString());
+		GUILayout.Label(GameObjectManager.GetTileTexture("Brick"), GUILayout.Width(30));
+		GUILayout.Label(currentPlayer.brick.ToString());
+		GUILayout.Label(GameObjectManager.GetTileTexture("Wheat"), GUILayout.Width(30));
+		GUILayout.Label(currentPlayer.wheat.ToString());
+		GUILayout.Label(GameObjectManager.GetTileTexture("Sheep"), GUILayout.Width(30));
+		GUILayout.Label(currentPlayer.sheep.ToString());
 
-		GUI.Label (new Rect (resources_box_unit*11, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Brick"));
-		GUI.Label (new Rect (resources_box_unit*11, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.brick.ToString());
-
-		GUI.Label (new Rect (resources_box_unit*16, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Wheat"));
-		GUI.Label (new Rect (resources_box_unit*16, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.wheat.ToString());
-
-		GUI.Label (new Rect (resources_box_unit*21, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Sheep"));
-		GUI.Label (new Rect (resources_box_unit*21, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.sheep.ToString());
-
-		// Current player's score on top right
-		float score_box_width = Screen.width*1/4;
-		float score_box_unit = score_box_width/10;
-
-		GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height / 25));
+		GUILayout.BeginVertical();
 
 
 
 
-
-
-
-		//GUI.Box (new Rect (Screen.width - score_box_width, -5, score_box_width+5, 15+score_box_unit*17), "");
-		GUI.color = player1.playerColor;
-		GUI.Label (new Rect (Screen.width - score_box_unit*9, 10, score_box_unit*4, score_box_unit*4), player1.victoryPoints.ToString() + "/10");
-		GUI.Label (new Rect (Screen.width - score_box_unit*5, 10, score_box_unit*5, score_box_unit*5), victoryPointsTex);
-
-		// Other player's score's below that
-		GUI.color = player2.playerColor;
-		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*5, score_box_unit*4, score_box_unit*4), player2.victoryPoints.ToString() + "/10");
-		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*5, score_box_unit*4, score_box_unit*4), victoryPointsTex);
-
-		GUI.color = player3.playerColor;
-		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*9, score_box_unit*4, score_box_unit*4), player3.victoryPoints.ToString() + "/10");
-		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*9, score_box_unit*4, score_box_unit*4), victoryPointsTex);
-
-		GUI.color = player4.playerColor;
-		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*13, score_box_unit*4, score_box_unit*4), player4.victoryPoints.ToString() + "/10");
-		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*13, score_box_unit*4, score_box_unit*4), victoryPointsTex);
+		GUILayout.EndVertical();
+		GUILayout.EndHorizontal();
+		GUILayout.EndArea();
 	}
 }
