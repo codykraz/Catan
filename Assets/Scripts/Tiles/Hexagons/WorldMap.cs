@@ -78,10 +78,10 @@ public class WorldMap : MonoBehaviour {
 	            
 	            edges.Add(new Vector3(pos.x+HexGlobals.Radius* Mathf.Sqrt(3)/2, pos.y, pos.z));
 	            edges.Add(new Vector3(pos.x-HexGlobals.Radius* Mathf.Sqrt(3)/2, pos.y, pos.z));
-	            edges30.Add(new Vector3(pos.x+2*Mathf.Sqrt(3), pos.y, pos.z+6));
-	            edges60.Add(new Vector3(pos.x+2*Mathf.Sqrt(3), pos.y, pos.z-6));
-	            edges60.Add(new Vector3(pos.x-2*Mathf.Sqrt(3), pos.y, pos.z+6));
-	            edges30.Add(new Vector3(pos.x-2*Mathf.Sqrt(3), pos.y, pos.z-6));
+	            edges60.Add(new Vector3(pos.x+2*Mathf.Sqrt(3), pos.y, pos.z+6));
+	            edges30.Add(new Vector3(pos.x+2*Mathf.Sqrt(3), pos.y, pos.z-6));
+	            edges30.Add(new Vector3(pos.x-2*Mathf.Sqrt(3), pos.y, pos.z+6));
+	            edges60.Add(new Vector3(pos.x-2*Mathf.Sqrt(3), pos.y, pos.z-6));
 	            
 	            intersections.Add(new Vector3(pos.x, pos.y, pos.z+HexGlobals.Radius));
 	            intersections.Add(new Vector3(pos.x, pos.y, pos.z-HexGlobals.Radius));//* Mathf.Sqrt(3)/2)
