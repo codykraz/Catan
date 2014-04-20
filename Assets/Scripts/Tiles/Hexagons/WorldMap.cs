@@ -10,6 +10,9 @@ public class WorldMap : MonoBehaviour {
 
 	public List<TileType> board;
 	public List<int> numbers;
+	
+	public HashSet<Vector3<float>> intersections;
+	public HashSet<Vector3<float>> edges;
 
     protected Dictionary<Vector2, Hex> hexes { get; set; }
 
@@ -67,6 +70,21 @@ public class WorldMap : MonoBehaviour {
 				if (((x==0 || x==4) && (y==0||y==4)) || (x==4 &&  (y==1||y==3))) continue;
 	            Vector2 position = new Vector2(x, y);
 	            Vector3 pos = ToPixel(position);
+	            
+	            intersections.add(pos.x+HexGlobals.Radius, pos.y, pos.z);
+	            intersections.add(pos.x-HexGlobals.Radius, pos.y, pos.z);
+	            intersections.add(pos.x+HexGlobals.Radius/2, pos.y, pos.z+HexGlobals.Radius* sqrt(3)/2);
+	            intersections.add(pos.x+HexGlobals.Radius/2, pos.y, pos.z-HexGlobals.Radius* sqrt(3)/2);
+	            intersections.add(pos.x-HexGlobals.Radius/2, pos.y, pos.z+HexGlobals.Radius* sqrt(3)/2);
+	            intersections.add(pos.x-HexGlobals.Radius/2, pos.y, pos.z-HexGlobals.Radius* sqrt(3)/2);
+	            
+	            edges.add(pos.x, pos.y, pos.z+HexGlobals.Radius* sqrt(3)/2);
+	            edges.add(pos.x, pos.y, pos.z-HexGlobals.Radius* sqrt(3)/2);
+	            edges.add(pos.x+6, pos.y, pos.z+ 2* sqrt(3));
+	            edges.add(pos.x+6, pos.y, pos.z-2* sqrt(3));
+	            edges.add(pos.x-6, pos.y, pos.z+ 2* sqrt(3));
+	            edges.add(pos.x-6, pos.y, pos.z-2* sqrt(3));
+	            
 
 	            GameObject hexObject = new GameObject();
 
@@ -92,9 +110,17 @@ public class WorldMap : MonoBehaviour {
 
 		    }
 		}
-
-
-
+		
+		IEnumerable<Vector3> distinctIntersections = intersections.Distinct();
+		IEnumerable<Vector3> distinctEdges = edges.Distinct();
+		foreach (Vector3 position in distinctIntersections){
+			GameObject settlement = (GameObject)Instantiate(Resources.Load("Settlement"));
+			settlement.transform.position = position;
+		}
+		foreach (Vector3 position in distinctEdges) {
+			GameObject road = (GameObject)Instantiate(Resources.Load("Road"));
+			road.transform.position = position;
+		}
 		
 	}
 
