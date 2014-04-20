@@ -12,7 +12,7 @@ public class WorldMap : MonoBehaviour {
 	public List<TileType> board;
 	public List<int> numbers;
 	
-	public HashSet<Vector3> intersections;
+	//public HashSet<Vector3> intersections;
 
     protected Dictionary<Vector2, Hex> hexes { get; set; }
 
@@ -60,7 +60,7 @@ public class WorldMap : MonoBehaviour {
 			2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12
 		};
 		
-		intersections = new HashSet<Vector3>();
+		//intersections = new HashSet<Vector3>();
 		int hexCount = 0;
 		int numCount = 0;
         hexes = new Dictionary<Vector2, Hex>();
@@ -72,14 +72,14 @@ public class WorldMap : MonoBehaviour {
 	            Vector2 position = new Vector2(x, y);
 	            Vector3 pos = ToPixel(position);
 	  
-	            
+	            /*
 	            intersections.Add(new Vector3((float)Math.Round(pos.x, 3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z+HexGlobals.Radius,3)));
 	            intersections.Add(new Vector3((float)Math.Round(pos.x, 3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z-HexGlobals.Radius,3)));//* Mathf.Sqrt(3)/2)
 	            intersections.Add(new Vector3((float)Math.Round(pos.x+HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z+HexGlobals.Radius/2,3)));
 	            intersections.Add(new Vector3((float)Math.Round(pos.x+HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z-HexGlobals.Radius/2,3)));
 	            intersections.Add(new Vector3((float)Math.Round(pos.x-HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z+HexGlobals.Radius/2,3)));
 	            intersections.Add(new Vector3((float)Math.Round(pos.x-HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z-HexGlobals.Radius/2,3)));
-	            
+	            */
 
 	            GameObject hexObject = new GameObject();
 
@@ -105,12 +105,12 @@ public class WorldMap : MonoBehaviour {
 
 		    }
 		}
-		
+		/*
 		IEnumerable<Vector3> distinctIntersections = intersections.Distinct();
 		foreach (Vector3 position in distinctIntersections){
 			GameObject settlement = (GameObject)Instantiate(Resources.Load("Settlement"));
 			settlement.transform.position = position;
-		}
+		}*/
 	}
 
 	public List<Vector2> GetNeighbors(int x, int y) {
