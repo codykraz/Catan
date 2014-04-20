@@ -27,7 +27,21 @@ public class CameraControler : MonoBehaviour
 
 	void Update()
 	{
-		if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
+		if(Input.GetMouseButtonDown(0))
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if(Physics.Raycast(ray, out hit))
+			{
+				if(hit.transform.CompareTag("Settlement")
+				   || hit.transform.CompareTag("City")
+				   || hit.transform.CompareTag("Road"))
+				{
+					selectedObject = hit.transform.gameObject;
+				}
+			}
+		}
+		else if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
 		{
 			Vector2 deltaTouch = Input.GetTouch(0).deltaPosition;
 
@@ -69,20 +83,6 @@ public class CameraControler : MonoBehaviour
 				position.z = Mathf.Clamp(position.z, zCenter - (zRange * multiplier), zCenter + (zRange * multiplier));
 				
 				this.transform.position = position;
-			}
-		}
-		else if(Input.touchCount == 1)
-		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-			RaycastHit hit;
-			if(Physics.Raycast(ray, out hit))
-			{
-				if(hit.transform.CompareTag("Settlement")
-				   || hit.transform.CompareTag("City")
-				   || hit.transform.CompareTag("Road"))
-				{
-					selectedObject = hit.transform.gameObject;
-				}
 			}
 		}
 	}

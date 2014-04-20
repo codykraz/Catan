@@ -69,7 +69,7 @@ public class ScoreGUI : MonoBehaviour {
 		float score_box_width = Screen.width*1/4;
 		float score_box_unit = score_box_width/10;
 
-
+		GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height / 25));
 
 
 
