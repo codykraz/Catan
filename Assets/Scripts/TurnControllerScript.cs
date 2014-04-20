@@ -48,7 +48,7 @@ public class TurnControllerScript : MonoBehaviour
 		}
 		else
 		{
-			if(turn == 2)
+			if(turn == 3)
 			{
 				turn = 3;
 				currentPlayer = turnOrder[3];
