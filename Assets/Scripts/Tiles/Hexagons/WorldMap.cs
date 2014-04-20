@@ -75,19 +75,19 @@ public class WorldMap : MonoBehaviour {
 	            Vector2 position = new Vector2(x, y);
 	            Vector3 pos = ToPixel(position);
 	            
-	            intersections.Add(new Vector3(pos.x+HexGlobals.Radius, pos.y, pos.z));
-	            intersections.Add(new Vector3(pos.x-HexGlobals.Radius, pos.y, pos.z));
-	            intersections.Add(new Vector3(pos.x+HexGlobals.Radius/2, pos.y, pos.z+HexGlobals.Radius* Mathf.Sqrt(3)/2));
-	            intersections.Add(new Vector3(pos.x+HexGlobals.Radius/2, pos.y, pos.z-HexGlobals.Radius* Mathf.Sqrt(3)/2));
-	            intersections.Add(new Vector3(pos.x-HexGlobals.Radius/2, pos.y, pos.z+HexGlobals.Radius* Mathf.Sqrt(3)/2));
-	            intersections.Add(new Vector3(pos.x-HexGlobals.Radius/2, pos.y, pos.z-HexGlobals.Radius* Mathf.Sqrt(3)/2));
+	            edges.Add(new Vector3(pos.x+HexGlobals.Radius, pos.y, pos.z));
+	            edges.Add(new Vector3(pos.x-HexGlobals.Radius, pos.y, pos.z));
+	            edges.Add(new Vector3(pos.x+HexGlobals.Radius/2, pos.y, pos.z+HexGlobals.Radius* Mathf.Sqrt(3)/2));
+	            edges.Add(new Vector3(pos.x+HexGlobals.Radius/2, pos.y, pos.z-HexGlobals.Radius* Mathf.Sqrt(3)/2));
+	            edges.Add(new Vector3(pos.x-HexGlobals.Radius/2, pos.y, pos.z+HexGlobals.Radius* Mathf.Sqrt(3)/2));
+	            edges.Add(new Vector3(pos.x-HexGlobals.Radius/2, pos.y, pos.z-HexGlobals.Radius* Mathf.Sqrt(3)/2));
 	            
-	            edges.Add(new Vector3(pos.x, pos.y, pos.z+HexGlobals.Radius* Mathf.Sqrt(3)/2));
-	            edges.Add(new Vector3(pos.x, pos.y, pos.z-HexGlobals.Radius* Mathf.Sqrt(3)/2));
-	            edges.Add(new Vector3(pos.x+6, pos.y, pos.z+ 2* Mathf.Sqrt(3)));
-	            edges.Add(new Vector3(pos.x+6, pos.y, pos.z-2* Mathf.Sqrt(3)));
-	            edges.Add(new Vector3(pos.x-6, pos.y, pos.z+ 2* Mathf.Sqrt(3)));
-	            edges.Add(new Vector3(pos.x-6, pos.y, pos.z-2* Mathf.Sqrt(3)));
+	            intersections.Add(new Vector3(pos.x, pos.y, pos.z+HexGlobals.Radius* Mathf.Sqrt(3)/2));
+	            intersections.Add(new Vector3(pos.x, pos.y, pos.z-HexGlobals.Radius* Mathf.Sqrt(3)/2));
+	            intersections.Add(new Vector3(pos.x+6, pos.y, pos.z+ 2* Mathf.Sqrt(3)));
+	            intersections.Add(new Vector3(pos.x+6, pos.y, pos.z-2* Mathf.Sqrt(3)));
+	            intersections.Add(new Vector3(pos.x-6, pos.y, pos.z+ 2* Mathf.Sqrt(3)));
+	            intersections.Add(new Vector3(pos.x-6, pos.y, pos.z-2* Mathf.Sqrt(3)));
 	            
 
 	            GameObject hexObject = new GameObject();
