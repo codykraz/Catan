@@ -54,6 +54,7 @@ public class BuildDialog : MonoBehaviour {
 		}
 
 		GUILayout.EndHorizontal ();
+
 		//Dev Card
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("Development Card");
@@ -62,6 +63,7 @@ public class BuildDialog : MonoBehaviour {
 		}
 		GUILayout.EndHorizontal ();
 		GUILayout.Space (Screen.height * 2 / 80);
+
 		//Cancel
 		if(GUILayout.Button("Cancel", GUILayout.Height (Screen.height* 3 /25)))
 		{
