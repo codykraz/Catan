@@ -49,16 +49,17 @@ public class ScoreGUI : MonoBehaviour {
 		GUILayout.BeginHorizontal();
 
 		GUILayout.Space(10);
+		GUIContent content = new GUIContent(currentPlayer.wood.ToString(), GameObjectManager.GetTileTexture("Wood"));
+		GUILayout.Label(content, GUILayout.Width(Screen.width / 10));
+		content.text = currentPlayer.ore.ToString();
+		content.image = GameObjectManager.GetTileTexture("Ore");
 
-		GUILayout.Label(GameObjectManager.GetTileTexture("Wood"), GUILayout.Width(30));
-		GUILayout.Label(currentPlayer.wood.ToString());
-		GUILayout.Label(GameObjectManager.GetTileTexture("Ore"), GUILayout.Width(30));
-		GUILayout.Label(currentPlayer.ore.ToString());
-		GUILayout.Label(GameObjectManager.GetTileTexture("Brick"), GUILayout.Width(30));
+		GUILayout.Label(content, GUILayout.Width(Screen.width / 10));
+		GUILayout.Label(GameObjectManager.GetTileTexture("Brick"), GUILayout.Width(Screen.width / 10));
 		GUILayout.Label(currentPlayer.brick.ToString());
-		GUILayout.Label(GameObjectManager.GetTileTexture("Wheat"), GUILayout.Width(30));
+		GUILayout.Label(GameObjectManager.GetTileTexture("Wheat"), GUILayout.Width(Screen.width / 10));
 		GUILayout.Label(currentPlayer.wheat.ToString());
-		GUILayout.Label(GameObjectManager.GetTileTexture("Sheep"), GUILayout.Width(30));
+		GUILayout.Label(GameObjectManager.GetTileTexture("Sheep"), GUILayout.Width(Screen.width / 10));
 		GUILayout.Label(currentPlayer.sheep.ToString());
 
 		GUILayout.BeginVertical();
