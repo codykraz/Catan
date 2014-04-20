@@ -131,7 +131,7 @@ public class WorldMap : MonoBehaviour {
 		foreach (Vector3 position in distinctEdges30) {
 			GameObject road = (GameObject)Instantiate(Resources.Load("Road"));
 			road.transform.position = position;
-			road.transform.eulerAngles = new Vector3(0,30,0);
+			road.transform.eulerAngles = new Vector3(0,60,0);
 		}
 		foreach (Vector3 position in distinctEdges60) {
 			GameObject road = (GameObject)Instantiate(Resources.Load("Road"));
