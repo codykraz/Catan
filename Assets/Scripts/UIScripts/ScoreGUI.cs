@@ -25,19 +25,19 @@ public class ScoreGUI : MonoBehaviour {
 
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
 
-		if(turnController.currentPlayer == "Player1")
+		if(string.Equals(turnController.currentPlayer, "Player1"))
 		{
 			currentPlayer = player1;
 		}
-		else if(turnController.currentPlayer == "Player2")
+		else if(string.Equals(turnController.currentPlayer, "Player2"))
 		{
 			currentPlayer = player2;
 		}
-		else if(turnController.currentPlayer == "Player3")
+		else if(string.Equals(turnController.currentPlayer, "Player3"))
 		{
 			currentPlayer = player3;
 		}
-		else if(turnController.currentPlayer == "Player4")
+		else if(string.Equals(turnController.currentPlayer, "Player4"))
 		{
 			currentPlayer = player4;
 		}
