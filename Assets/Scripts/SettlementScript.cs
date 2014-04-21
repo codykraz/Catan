@@ -8,6 +8,8 @@ public class SettlementScript : MonoBehaviour
 	public bool Player3CanBuildHere = false;
 	public bool Player4CanBuildHere = false;
 
+	public bool initial = false;
+
 	bool isCity = false;
 
 	public GameObject city;
@@ -36,6 +38,8 @@ public class SettlementScript : MonoBehaviour
 		this.renderer.material.color = player.playerColor;
 		this.renderer.enabled = true;
 		player.settlementsUsed++;
+
+		this.initial = true;
 
 		this.nearbySettlement = true;
 		this.hasOwner = true;
@@ -145,6 +149,11 @@ public class SettlementScript : MonoBehaviour
 
 		foreach(Collider coll in colliders)
 		{
+			if(initial)
+			{
+				coll.GetComponent<RoadScript>().initial = true;
+			}
+
 			if(turnController.currentPlayer == "Player1")
 			{
 				coll.GetComponent<RoadScript>().Player1CanBuildHere = true;
