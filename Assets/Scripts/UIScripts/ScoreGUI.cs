@@ -58,11 +58,12 @@ public class ScoreGUI : MonoBehaviour {
 		GUI.Label (new Rect (resources_box_unit*15, 0, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Wheat"));
 		GUI.Label (new Rect (resources_box_unit*20, 0, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Sheep"));
 		GUI.contentColor = currentPlayer.playerColor;
-		GUI.Label (new Rect (resources_box_unit*0, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.wood.ToString()+ "\nWood");
-		GUI.Label (new Rect (resources_box_unit*5, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.ore.ToString()+ "\nOre");
-		GUI.Label (new Rect (resources_box_unit*10, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.brick.ToString()+"\nBrick");
-		GUI.Label (new Rect (resources_box_unit*15, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.wheat.ToString()+"\nWheat");
-		GUI.Label (new Rect (resources_box_unit*20, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.sheep.ToString()+"\nSheep");
+		GUI.Label (new Rect (resources_box_unit*0, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.wood.ToString()+ "\nWood\nX:"+currentPlayer.woodTradeIn);
+		GUI.Label (new Rect (resources_box_unit*5, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.ore.ToString()+ "\nOre\nX:"+currentPlayer.oreTradeIn);
+		GUI.Label (new Rect (resources_box_unit*10, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.brick.ToString()+"\nBrick\nX:"+currentPlayer.brickTradeIn);
+		GUI.Label (new Rect (resources_box_unit*15, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.wheat.ToString()+"\nWheat\nX:"+currentPlayer.wheatTradeIn);
+		GUI.Label (new Rect (resources_box_unit*20, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.sheep.ToString()+"\nSheep\nX:"+currentPlayer.sheepTradeIn);
+
 
 		if (die.diceRoll != -1){
 			GUI.Label (new Rect (Screen.width-resources_box_unit*5, 0, resources_box_unit*5, resources_box_unit*5), "Roll:");
