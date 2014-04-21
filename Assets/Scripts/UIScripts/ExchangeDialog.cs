@@ -50,7 +50,7 @@ public class ExchangeDialog : MonoBehaviour {
 			GUI.ModalWindow (exc_winID, new Rect (Screen.width / 10, Screen.height *8/ 30, Screen.width * 4 / 5, Screen.height * 7 / 15), ModalContents, "Exchange");
 		}
 		if(res_alert_exc){
-			GUI.ModalWindow (res_alert_winID, new Rect (Screen.width / 5, Screen.height / 6, Screen.width * 3 / 5, Screen.height *2/ 3), ResAlrtContents, "Not Enough Resources");	
+			GUI.ModalWindow (res_alert_winID, new Rect (Screen.width / 5, Screen.height *3/ 8, Screen.width * 3 / 5, Screen.height *1/ 4), ResAlrtContents, "Not Enough Resources");	
 		}
 	}
 	void ModalContents (int windowID)
@@ -281,13 +281,13 @@ public class ExchangeDialog : MonoBehaviour {
 
 	void ResAlrtContents (int windowID)
 	{
-		GUILayout.BeginArea (new Rect (Screen.width / 10, Screen.height* 2 / 27, Screen.width * 2 / 5, Screen.height* 14 / 27));
+		GUILayout.BeginArea (new Rect (Screen.width*1/40, Screen.height* 1 / 54, Screen.width * 11 / 20, Screen.height* 9 / 36));
 		GUILayout.BeginVertical ();
 
-		GUILayout.Space (Screen.width*5 / 27);
+		GUILayout.Space (Screen.height*1/ 27);
 		GUILayout.Label ("You do not possess enough of the selected resource!");
-		GUILayout.Space (Screen.width*1/27);
-		if(GUILayout.Button("Continue",GUILayout.Height (Screen.height*7/96)))
+		GUILayout.Space (Screen.height*1/81);
+		if(GUILayout.Button("Continue",GUILayout.Height (Screen.height*3/36)))
 		{
 			res_alert_exc = false;
 		}
