@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class ExchangeDialog : MonoBehaviour {
+	public GUISkin g;
+
 	int exc_winID = 2014;
 	int res_alert_winID = 9102;
 	PlayerScript current_player;
@@ -42,6 +44,7 @@ public class ExchangeDialog : MonoBehaviour {
 	
 	// Use this for initialization
 	void OnGUI () {
+		GUI.skin = g;
 		//Background
 		if (show_exc){
 			GUI.ModalWindow (exc_winID, new Rect (Screen.width / 10, Screen.height *8/ 30, Screen.width * 4 / 5, Screen.height * 7 / 15), ModalContents, "Exchange");

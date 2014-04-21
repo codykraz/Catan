@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class TradeDialog : MonoBehaviour {
+	public GUISkin g;
 
 	int trd_winID = 5293;
 	private TurnControllerScript turnController;
@@ -31,6 +32,7 @@ public class TradeDialog : MonoBehaviour {
 	// Use this for initialization
 	void OnGUI () {
 		//Background
+		GUI.skin = g;
 		if (show_trd){
 			GUI.ModalWindow (trd_winID, new Rect (Screen.width / 20, Screen.height *6/ 30, Screen.width * 9 / 10, Screen.height * 9 / 15), ModalContents, "Trade Window");
 		}

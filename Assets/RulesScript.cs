@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class RulesScript : MonoBehaviour {
-	public GUIStyle g;
+	public GUISkin g;
 
 	private int rule = 0;
 
@@ -27,25 +27,25 @@ public class RulesScript : MonoBehaviour {
 		else
 			buttonDivider = 1;
 		if (rule > 0){
-			if(GUI.Button(new Rect (0,7*Screen.height/8,Screen.width/buttonDivider,Screen.height/8), "Back",g)) {
+			if(GUI.Button(new Rect (0,7*Screen.height/8,Screen.width/buttonDivider,Screen.height/8), "Back")) {
 				rule--;
 			}
 		}
 
 		if (rule < 2){
 			if (rule == 1){
-				if(GUI.Button(new Rect (Screen.width/2,7*Screen.height/8,Screen.width/buttonDivider,Screen.height/8), "Next",g)) {
+				if(GUI.Button(new Rect (Screen.width/2,7*Screen.height/8,Screen.width/buttonDivider,Screen.height/8), "Next")) {
 					rule++;
 				}
 			}
 			
 			else{
-				if(GUI.Button(new Rect (0,7*Screen.height/8,Screen.width/buttonDivider,Screen.height/8), "Next",g)) {
+				if(GUI.Button(new Rect (0,7*Screen.height/8,Screen.width/buttonDivider,Screen.height/8), "Next")) {
 					rule++;
 				}
 			}
 		}
-		if(GUI.Button(new Rect (0,6*Screen.height/8,Screen.width,Screen.height/8), "New Game",g)) {
+		if(GUI.Button(new Rect (0,6*Screen.height/8,Screen.width,Screen.height/8), "New Game")) {
 			Application.LoadLevel("WorldMap");
 		}
 	}

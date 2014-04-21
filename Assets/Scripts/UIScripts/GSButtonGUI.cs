@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GSButtonGUI : MonoBehaviour {
-
+	public GUISkin g;
 	float width_buffer = 20;
 	float button_height = Screen.height* 3 /25;
 	public static bool show;
@@ -20,6 +20,9 @@ public class GSButtonGUI : MonoBehaviour {
 	private PlayerScript player3;
 	private PlayerScript player4;
 
+
+	
+
 	void Start() {
 		show = true;
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
@@ -35,7 +38,7 @@ public class GSButtonGUI : MonoBehaviour {
 
 	void OnGUI () 
 	{
-
+		GUI.skin = g;
 		if(show)
 		{
 			if(turnStart)

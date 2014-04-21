@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class ScoreGUI : MonoBehaviour {
+	public GUISkin g;
 
 	public Texture2D victoryPointsTex;
 
@@ -13,6 +14,7 @@ public class ScoreGUI : MonoBehaviour {
 	private PlayerScript currentPlayer;
 
 	private TurnControllerScript turnController;
+	
 
 	void Start() 
 	{
@@ -42,7 +44,7 @@ public class ScoreGUI : MonoBehaviour {
 	}
 
 	void OnGUI () {
-
+		GUI.skin = g;
 		float resources_box_width = Screen.width*3/4;
 		float resources_box_unit = resources_box_width/26;
 		

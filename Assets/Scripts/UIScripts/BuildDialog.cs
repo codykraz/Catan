@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class BuildDialog : MonoBehaviour {
+	public GUISkin g;
+
 	float pic_width = 70;
 	int build_bldID = 1026;
 	int res_alert2_winID= 7320;
@@ -34,7 +36,7 @@ public class BuildDialog : MonoBehaviour {
 	// Use this for initialization
 	void OnGUI () {
 		//Background
-		
+		GUI.skin = g;
 		if(res_alert_exc){
 			GUI.ModalWindow (res_alert2_winID, new Rect (Screen.width / 5, Screen.height / 6, Screen.width * 3 / 5, Screen.height *2/ 3), ResAlrtContents, "Not Enough Resources");	
 		}
