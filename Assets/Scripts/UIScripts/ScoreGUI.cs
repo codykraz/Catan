@@ -49,7 +49,7 @@ public class ScoreGUI : MonoBehaviour {
 		{
 			currentPlayer = player4;
 		}
-		GUI.Box (new Rect (0,0,Screen.width,resources_box_unit*9),"");
+		GUI.Box (new Rect (0,0,Screen.width,resources_box_unit*8),"");
 
 		GUI.contentColor = Color.white;
 		GUI.Label (new Rect (resources_box_unit*0, 0, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Wood"));
@@ -66,7 +66,7 @@ public class ScoreGUI : MonoBehaviour {
 
 		if (die.diceRoll != -1){
 			GUI.Label (new Rect (Screen.width-resources_box_unit*5, 0, resources_box_unit*5, resources_box_unit*5), "Roll:");
-			GUI.Label (new Rect (Screen.width-resources_box_unit*5, 0, resources_box_unit*5, resources_box_unit*5), die.diceRoll.ToString());
+			GUI.Label (new Rect (Screen.width-resources_box_unit*5, resources_box_unit*5, resources_box_unit*5, resources_box_unit*5), die.diceRoll.ToString());
 		}
 
 		// Current player's score on top right
