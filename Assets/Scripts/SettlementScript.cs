@@ -8,6 +8,8 @@ public class SettlementScript : MonoBehaviour
 	public bool Player3CanBuildHere = false;
 	public bool Player4CanBuildHere = false;
 
+	public bool initial = false;
+
 	bool isCity = false;
 
 	public GameObject city;
@@ -37,12 +39,12 @@ public class SettlementScript : MonoBehaviour
 		this.renderer.enabled = true;
 		player.settlementsUsed++;
 
+		this.initial = true;
+
 		this.nearbySettlement = true;
 		this.hasOwner = true;
 
 		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 12, 1 << LayerMask.NameToLayer("Settlement"));
-
-		Debug.Log (colliders.Length);
 
 		foreach(Collider coll in colliders)
 		{
@@ -131,8 +133,6 @@ public class SettlementScript : MonoBehaviour
 	{
 		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, 1 << LayerMask.NameToLayer("Port"));
 
-		Debug.Log (colliders.Length);
-
 		foreach(Collider coll in colliders)
 		{
 			coll.GetComponent<PortScript>().takeControl();
@@ -145,6 +145,11 @@ public class SettlementScript : MonoBehaviour
 
 		foreach(Collider coll in colliders)
 		{
+			if(initial)
+			{
+				coll.GetComponent<RoadScript>().initial = true;
+			}
+
 			if(turnController.currentPlayer == "Player1")
 			{
 				coll.GetComponent<RoadScript>().Player1CanBuildHere = true;

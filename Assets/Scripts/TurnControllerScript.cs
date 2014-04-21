@@ -4,6 +4,7 @@ using System.Collections;
 public class TurnControllerScript : MonoBehaviour
 {
 	public string currentPlayer = "Player1";
+	public int numPlayers = 4;
 	
 	public string[] turnOrder;
 
@@ -25,7 +26,10 @@ public class TurnControllerScript : MonoBehaviour
 
 	void Awake()
 	{
-		turnOrder = new string[] {"Player1", "Player2", "Player3", "Player4"};
+		if (numPlayers == 4)
+			turnOrder = new string[] {"Player1", "Player2", "Player3", "Player4"};
+		else
+			turnOrder = new string[] {"Player1", "Player2", "Player3"};
 		shuffleArray(ref turnOrder);
 		currentPlayer = turnOrder[0];
 	}
@@ -34,12 +38,7 @@ public class TurnControllerScript : MonoBehaviour
 	{
 		if(reverse)
 		{
-			if(turn == 1)
-			{
-				turn = 0;
-				currentPlayer = turnOrder[0];
-				initialComplete = true;
-			}
+			if (turn == 0) initialComplete = true;
 			else
 			{
 				turn--;

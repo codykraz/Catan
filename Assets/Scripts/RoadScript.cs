@@ -8,6 +8,8 @@ public class RoadScript : MonoBehaviour
 	public bool Player3CanBuildHere = false;
 	public bool Player4CanBuildHere = false;
 
+	public bool initial = false;
+
 	public bool hasOwner = false;
 	
 	private PlayerScript player;
@@ -17,6 +19,16 @@ public class RoadScript : MonoBehaviour
 	void Awake()
 	{
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
+	}
+
+	public bool buildInitial()
+	{
+		if(initial == false)
+		{
+			return false;
+		}
+
+		return build();
 	}
 
 	public bool build()

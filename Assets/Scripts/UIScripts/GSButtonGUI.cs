@@ -20,7 +20,7 @@ public class GSButtonGUI : MonoBehaviour {
 	private PlayerScript player3;
 	private PlayerScript player4;
 
-
+	private CameraControler cc;
 	
 
 	void Start() {
@@ -34,6 +34,7 @@ public class GSButtonGUI : MonoBehaviour {
 		player4 = GameObject.Find("Player4").GetComponent<PlayerScript>();
 
 		show_next_turn = false;
+		cc = Camera.main.GetComponent<CameraControler> ();
 	}
 
 	void OnGUI () 
@@ -41,6 +42,22 @@ public class GSButtonGUI : MonoBehaviour {
 		GUI.skin = g;
 		if(show)
 		{
+
+			if (!turnController.initialComplete){
+				GUILayout.BeginArea(new Rect(0, Screen.height * 3.5f / 5, Screen.width, Screen.height / 5));
+				GUILayout.Box("Select a position to place a settlement");
+				GUILayout.EndArea();
+
+				if(cc.selectedObject != null && cc.selectedObject.tag == "Settlement"){
+
+					cc.selectedObject.GetComponent<SettlementScript>().buildInitial();
+					cc.selectedObject = null;
+					turnController.initialNextTurn();
+
+				}
+			}
+
+
 			if(turnStart)
 			{
 				if(GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>().knightDevCard > 0)
