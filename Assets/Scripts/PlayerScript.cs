@@ -7,6 +7,8 @@ public class PlayerScript : MonoBehaviour
 
 	public int victoryPoints = 0;
 
+	public int handSize = 0;
+
 	public int brick = 0;
 	public int wheat = 0;
 	public int sheep = 0;
@@ -53,5 +55,7 @@ public class PlayerScript : MonoBehaviour
 		{
 			victoryPoints += 2;
 		}
+
+		handSize = wood + brick + ore + sheep + wheat;
 	}
 }
