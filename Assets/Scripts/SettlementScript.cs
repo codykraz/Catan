@@ -8,6 +8,8 @@ public class SettlementScript : MonoBehaviour
 	public bool Player3CanBuildHere = false;
 	public bool Player4CanBuildHere = false;
 
+	bool isCity = false;
+
 	public GameObject city;
 	
 	private bool nearbySettlement = false;
@@ -88,7 +90,7 @@ public class SettlementScript : MonoBehaviour
 
 	public bool buildCity()
 	{
-		if(this.hasOwner == false)
+		if(this.hasOwner == false || this.isCity == true)
 		{
 			return false;
 		}
@@ -98,7 +100,11 @@ public class SettlementScript : MonoBehaviour
 		   || (turnController.currentPlayer == "Player3" && player.gameObject.name == "Player3")
 		   || (turnController.currentPlayer == "Player4" && player.gameObject.name == "Player4"))
 		{
-			Instantiate(city, this.transform.position, this.transform.rotation);
+			player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
+			player.citiesUsed++;
+			player.settlementsUsed--;
+
+			this.isCity = true;
 
 			return true;
 		}
@@ -150,25 +156,51 @@ public class SettlementScript : MonoBehaviour
 			return;
 		}
 
-		if(tileType == TileType.Brick)
+		if(isCity)
 		{
-			player.brick++;
+			if(tileType == TileType.Brick)
+			{
+				player.brick += 2;
+			}
+			else if(tileType == TileType.Wood)
+			{
+				player.wood += 2;
+			}
+			else if(tileType == TileType.Ore)
+			{
+				player.ore += 2;
+			}
+			else if(tileType == TileType.Sheep)
+			{
+				player.sheep += 2;
+			}
+			else if(tileType == TileType.Wheat)
+			{
+				player.wheat += 2;
+			}
 		}
-		else if(tileType == TileType.Wood)
+		else
 		{
-			player.wood++;
-		}
-		else if(tileType == TileType.Ore)
-		{
-			player.ore++;
-		}
-		else if(tileType == TileType.Sheep)
-		{
-			player.sheep++;
-		}
-		else if(tileType == TileType.Wheat)
-		{
-			player.wheat++;
+			if(tileType == TileType.Brick)
+			{
+				player.brick++;
+			}
+			else if(tileType == TileType.Wood)
+			{
+				player.wood++;
+			}
+			else if(tileType == TileType.Ore)
+			{
+				player.ore++;
+			}
+			else if(tileType == TileType.Sheep)
+			{
+				player.sheep++;
+			}
+			else if(tileType == TileType.Wheat)
+			{
+				player.wheat++;
+			}
 		}
 	}
 }
