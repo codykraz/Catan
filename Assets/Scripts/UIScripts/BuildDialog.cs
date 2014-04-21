@@ -3,11 +3,8 @@ using System.Collections;
 
 public class BuildDialog : MonoBehaviour {
 	public GUISkin g;
-
-	float pic_width = 70;
 	int build_bldID = 1026;
 	int res_alert2_winID= 7320;
-	int build2ID = 92013013;
 	int pos_alert2_winID = 819074981;
 	PlayerScript current_player;
 	

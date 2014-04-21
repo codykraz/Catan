@@ -4,9 +4,7 @@ using System.Collections;
 public class VictoryDialog : MonoBehaviour {
 	public GUISkin g;
 
-	float pic_width = 70;
 	int vic_winID = 1337;
-	Texture AMan;
 	public static bool show_vic = false;
 
 	private PlayerScript player1;
@@ -19,7 +17,6 @@ public class VictoryDialog : MonoBehaviour {
 	string winner;
 
 	void Start() {
-		AMan = Resources.Load ("A-Man", typeof(Texture)) as Texture;
 
 		player1 = GameObject.Find("Player1").GetComponent<PlayerScript>();
 		player2 = GameObject.Find("Player2").GetComponent<PlayerScript>();

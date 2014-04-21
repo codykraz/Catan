@@ -3,7 +3,6 @@ using System.Collections;
 
 public class GSButtonGUI : MonoBehaviour {
 	public GUISkin g;
-	float width_buffer = 20;
 	public float button_height = Screen.height* 3 /25;
 	public bool show;
 	public static bool show_next_turn;

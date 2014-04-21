@@ -7,10 +7,7 @@ public class ActionsDialog : MonoBehaviour {
 	public GUISkin g;
 	
 	public float button_height = Screen.height* 3 /25;
-	float pic_width = 70;
 	int act_winID = 2142;
-
-	float width_buffer = 20;
 	TradeDialog td;
 	PlayerScript current_player;
 	int toGain = 0;
