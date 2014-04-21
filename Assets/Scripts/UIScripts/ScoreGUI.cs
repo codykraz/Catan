@@ -21,7 +21,6 @@ public class ScoreGUI : MonoBehaviour {
 		player3 = GameObject.Find("Player3").GetComponent<PlayerScript>();
 		player4 = GameObject.Find("Player4").GetComponent<PlayerScript>();
 
-		victoryPointsTex = new Texture2D(10, 10);
 		
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
 
