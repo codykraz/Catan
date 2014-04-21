@@ -35,6 +35,13 @@ public class Hex : MonoBehaviour {
 		// Tile type enum
 		this.tileType = type;
 
+		if(type == TileType.Desert)
+		{
+			GameObject robber = GameObject.Find("Robber");
+			robber.transform.position = this.transform.position;
+			this.blocked = true;
+		}
+
 		// Set Texture
 		Texture2D text = GameObjectManager.GetTileTexture(type.ToString());
 		if (text != null)

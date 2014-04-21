@@ -35,7 +35,8 @@ public class CameraControler : MonoBehaviour
 			{
 				if(hit.transform.CompareTag("Settlement")
 				   || hit.transform.CompareTag("City")
-				   || hit.transform.CompareTag("Road"))
+				   || hit.transform.CompareTag("Road")
+				   || string.Equals(hit.transform.name, "Hex"))
 				{
 					selectedObject = hit.transform.gameObject;
 				}
