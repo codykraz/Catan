@@ -62,7 +62,7 @@ public class TurnControllerScript : MonoBehaviour
 		}
 	}
 
-	void nextTurn()
+	public void nextTurn()
 	{
 		if(turn == 3)
 		{

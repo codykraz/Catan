@@ -55,12 +55,22 @@ public class ScoreGUI : MonoBehaviour {
 		content.image = GameObjectManager.GetTileTexture("Ore");
 
 		GUILayout.Label(content, GUILayout.Width(Screen.width / 10));
-		GUILayout.Label(GameObjectManager.GetTileTexture("Brick"), GUILayout.Width(Screen.width / 10));
+		content.text = currentPlayer.brick.ToString();
+		content.image = GameObjectManager.GetTileTexture("Brick");
+		GUILayout.Label(content, GUILayout.Width(Screen.width / 10));
+		content.text = currentPlayer.wheat.ToString();
+		content.image = GameObjectManager.GetTileTexture("Wheat");
+		GUILayout.Label(content, GUILayout.Width(Screen.width / 10));
+		content.text = currentPlayer.sheep.ToString();
+		content.image = GameObjectManager.GetTileTexture("Sheep");
+		GUILayout.Label(content, GUILayout.Width(Screen.width / 10));
+
+		/*GUILayout.Label(GameObjectManager.GetTileTexture("Brick"), GUILayout.Width(Screen.width / 10));
 		GUILayout.Label(currentPlayer.brick.ToString());
 		GUILayout.Label(GameObjectManager.GetTileTexture("Wheat"), GUILayout.Width(Screen.width / 10));
 		GUILayout.Label(currentPlayer.wheat.ToString());
 		GUILayout.Label(GameObjectManager.GetTileTexture("Sheep"), GUILayout.Width(Screen.width / 10));
-		GUILayout.Label(currentPlayer.sheep.ToString());
+		GUILayout.Label(currentPlayer.sheep.ToString());*/
 
 		GUILayout.BeginVertical();
 
