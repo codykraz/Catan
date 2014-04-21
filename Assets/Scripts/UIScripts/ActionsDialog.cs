@@ -33,7 +33,8 @@ public class ActionsDialog : MonoBehaviour {
 		}
 		if(GUILayout.Button("Trade with Player", GUILayout.Height (Screen.height* 3 /25)))
 		{
-			//Trade();
+			//TradeDialog.show ();
+			hide ();
 		}
 		if(GUILayout.Button("Exchange Resource", GUILayout.Height (Screen.height* 3 /25)))
 		{
