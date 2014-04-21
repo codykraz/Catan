@@ -10,6 +10,7 @@ public class ActionsDialog : MonoBehaviour {
 	int act_winID = 2142;
 	TradeDialog td;
 	PlayerScript current_player;
+	GSButtonGUI gs;
 	int toGain = 0;
 	
 	private TurnControllerScript turnController;
@@ -21,6 +22,7 @@ public class ActionsDialog : MonoBehaviour {
 	
 	void Start() {
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
+		gs = GameObject.Find ("UIScripts").GetComponent<GSButtonGUI> ();
 	}
 	
 	// Use this for initialization
@@ -30,6 +32,49 @@ public class ActionsDialog : MonoBehaviour {
 		if (show_act){
 			GUI.ModalWindow (act_winID, new Rect (Screen.width / 10, Screen.height / 10, Screen.width * 4 / 5, Screen.height * 4 / 5), ModalContents, "Actions");
 		}
+		if(playKnight)
+		{
+			gs.show = false;
+			if(GUI.Button(new Rect(Screen.width/2,Screen.height-button_height,Screen.width/2,button_height), "Cancel")) {
+				playKnight = false;
+			}
+			
+			GUILayout.BeginArea(new Rect(0, Screen.height -button_height, Screen.width, button_height));
+			GUILayout.Box(turnController.currentPlayer +": Select a position to place the knight", GUILayout.ExpandHeight(true));
+			GUILayout.EndArea();
+			
+			CameraControler cc = GameObject.Find("Main Camera").GetComponent<CameraControler>();
+			
+			if(cc.selectedObject != null && string.Equals(cc.selectedObject.name, "Hex"))
+			{
+				if(cc.selectedObject.GetComponent<Hex>().blocked == false)
+				{
+					GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
+					
+					foreach(GameObject obj in objects)
+					{
+						if(string.Equals(obj.name, "Hex"))
+						{
+							if(obj.GetComponent<Hex>().tileType != TileType.Desert)
+							{
+								obj.GetComponent<Hex>().blocked = false;
+								gs.show = true;
+								current_player.largestArmyCount++;
+								current_player.knightDevCard--;
+							}
+						}
+					}
+					
+					cc.selectedObject.GetComponent<Hex>().blocked = true;
+					GameObject robber = GameObject.Find("Robber");
+					robber.transform.position = cc.selectedObject.transform.position;
+					GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>().knightDevCard--;
+					
+					playKnight = false;
+				}
+			}
+		}
+
 			
 	}
 
@@ -81,45 +126,7 @@ public class ActionsDialog : MonoBehaviour {
 		GUILayout.BeginArea (new Rect (Screen.width / 10, Screen.height / 10, Screen.width * 3 / 5, Screen.height * 4 / 5));
 		GUILayout.BeginVertical ();
 
-		if(playKnight)
-		{
-			if(GUI.Button(new Rect(Screen.width/2,Screen.height-button_height,Screen.width/2,button_height), "Cancel")) {
-				playKnight = false;
-			}
-			
-			GUILayout.BeginArea(new Rect(0, Screen.height -button_height, Screen.width, button_height));
-			GUILayout.Box(turnController.currentPlayer +": Select a position to place the knight", GUILayout.ExpandHeight(true));
-			GUILayout.EndArea();
-
-			CameraControler cc = GameObject.Find("Main Camera").GetComponent<CameraControler>();
-
-			if(cc.selectedObject != null && string.Equals(cc.selectedObject.name, "Hex"))
-			{
-				if(cc.selectedObject.GetComponent<Hex>().blocked == false)
-				{
-					GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
-					
-					foreach(GameObject obj in objects)
-					{
-						if(string.Equals(obj.name, "Hex"))
-						{
-							if(obj.GetComponent<Hex>().tileType != TileType.Desert)
-							{
-								obj.GetComponent<Hex>().blocked = false;
-							}
-						}
-					}
-					
-					cc.selectedObject.GetComponent<Hex>().blocked = true;
-					GameObject robber = GameObject.Find("Robber");
-					robber.transform.position = cc.selectedObject.transform.position;
-					GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>().knightDevCard--;
-
-					playKnight = false;
-				}
-			}
-		}
-		else if (Amenu == actions.menu) {
+		 if (Amenu == actions.menu) {
 				if (GUILayout.Button ("Build", GUILayout.Height (Screen.height * 3 / 25))) {
 						BuildDialog.show ();
 						hide ();
@@ -151,6 +158,8 @@ public class ActionsDialog : MonoBehaviour {
 					
 					GameObject.Find("Main Camera").GetComponent<CameraControler>().selectedObject = null;
 					playKnight = true;
+					Amenu = actions.menu;
+					hide ();
 				}
 			}
 			if (current_player.yearOfPlentyDevCard > 0){

@@ -7,10 +7,14 @@ public class VictoryDialog : MonoBehaviour {
 	int vic_winID = 1337;
 	public static bool show_vic = false;
 
+	int longRd = 5;
+	int lgArmy = 2;
+
 	private PlayerScript player1;
 	private PlayerScript player2;
 	private PlayerScript player3;
 	private PlayerScript player4;
+	private PlayerScript[] players;
 
 	private GSButtonGUI gs;
 
@@ -23,6 +27,8 @@ public class VictoryDialog : MonoBehaviour {
 		player3 = GameObject.Find("Player3").GetComponent<PlayerScript>();
 		player4 = GameObject.Find("Player4").GetComponent<PlayerScript>();
 
+		players = new PlayerScript[]{player1,player2, player3,player4};
+
 		winner = "Player1";
 		gs = GetComponent<GSButtonGUI> ();
 	}
@@ -34,6 +40,21 @@ public class VictoryDialog : MonoBehaviour {
 		if (show_vic){
 			GUI.ModalWindow (vic_winID, new Rect (Screen.width / 5, Screen.height / 3, Screen.width * 3 / 5, Screen.height / 3), ModalContents, "Victory!");
 		}
+
+		for (int i = 0; i < 4; i++) {
+			if (players[i].largestArmyCount>lgArmy){
+				for (int x = 0; x < 4; x++) players[x].hasLargestArmy = false;
+				players[i].hasLargestArmy = true;
+				lgArmy = players[i].largestArmyCount;
+			}
+
+			if (players[i].roadsUsed > longRd){
+				for (int x = 0; x < 4; x++) players[x].hasLongestRoad = false;
+				players[i].hasLongestRoad = true;
+				longRd = players[i].roadsUsed;
+			}
+		}
+
 
 		if (player1.victoryPoints >= 10) {
 			gs.show = false;
