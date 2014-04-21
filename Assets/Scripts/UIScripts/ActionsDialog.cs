@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
+public enum actions{menu, devCard, yop, mono, rb};
+
 public class ActionsDialog : MonoBehaviour {
 	public GUISkin g;
 
@@ -10,11 +12,12 @@ public class ActionsDialog : MonoBehaviour {
 	float width_buffer = 20;
 	TradeDialog td;
 	PlayerScript current_player;
+	int toGain = 0;
 	
 	private TurnControllerScript turnController;
 
 	public static bool show_act = false;
-	bool devCardMenu = false;
+	actions Amenu = actions.menu;
 	
 	void Start() {
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
@@ -29,6 +32,47 @@ public class ActionsDialog : MonoBehaviour {
 		}
 			
 	}
+
+	void monopoly(TileType t){
+		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		int res = 0;
+
+		if (t == TileType.Wood) {
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().wood;
+				players[i].GetComponent<PlayerScript>().wood = 0;
+			}
+			current_player.wood = res;
+		}
+		if (t == TileType.Sheep) {
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().sheep;
+				players[i].GetComponent<PlayerScript>().sheep = 0;
+			}
+			current_player.sheep = res;
+		}
+		if (t == TileType.Brick){
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().brick;
+				players[i].GetComponent<PlayerScript>().brick = 0;
+			}
+			current_player.brick = res;
+		}
+		if (t == TileType.Ore) {
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().ore;
+				players[i].GetComponent<PlayerScript>().ore = 0;
+			}
+			current_player.ore = res;
+		}
+		if (t == TileType.Wheat) {
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().wheat;
+				players[i].GetComponent<PlayerScript>().wheat = 0;
+			}
+			current_player.wheat = res;
+		}
+	}
 	
 	void ModalContents (int windowID)
 	{
@@ -36,7 +80,7 @@ public class ActionsDialog : MonoBehaviour {
 		GUILayout.BeginArea (new Rect (Screen.width / 10, Screen.height / 10, Screen.width * 3 / 5, Screen.height * 4 / 5));
 		GUILayout.BeginVertical ();
 
-		if (!devCardMenu) {
+		if (Amenu == actions.menu) {
 				if (GUILayout.Button ("Build", GUILayout.Height (Screen.height * 3 / 25))) {
 						BuildDialog.show ();
 						hide ();
@@ -53,12 +97,16 @@ public class ActionsDialog : MonoBehaviour {
 				}
 				if (current_player.knightDevCard > 0 || current_player.victoryDevCard > 0 || current_player.yearOfPlentyDevCard > 0 || current_player.monopolyDevCard > 0 || current_player.roadBuildingDevCard > 0) {
 						if (GUILayout.Button ("Play Development Card", GUILayout.Height (Screen.height * 3 / 25))) {
-							devCardMenu = true;
+							Amenu = actions.devCard;
 						}
 				}
+			if (GUILayout.Button ("Cancel", GUILayout.Height (Screen.height * 3 / 25))) {
+				hide ();
+				Amenu = actions.menu;
+			}
 				
 		}
-		else{
+		else if (Amenu == actions.devCard){
 			if (current_player.knightDevCard > 0) {
 				if (GUILayout.Button ("Play Knight Card", GUILayout.Height (Screen.height * 3 / 25))) {
 
@@ -66,25 +114,102 @@ public class ActionsDialog : MonoBehaviour {
 			}
 			if (current_player.yearOfPlentyDevCard > 0){
 				if (GUILayout.Button ("Play Year of Plenty", GUILayout.Height (Screen.height * 3 / 25))) {
-
+					Amenu = actions.yop;
+					toGain = 2;
 				}
 			}
 
 			if(current_player.monopolyDevCard > 0) {
 				if (GUILayout.Button ("Play Monopoly Card", GUILayout.Height (Screen.height * 3 / 25))) {
-					
+					Amenu = actions.mono;
 				}
 			}
 
 			if(current_player.roadBuildingDevCard > 0){
 				if (GUILayout.Button ("Play Road Building", GUILayout.Height (Screen.height * 3 / 25))) {
-					
+					Amenu = actions.rb;
 				}
 			}
+			if (GUILayout.Button ("Cancel", GUILayout.Height (Screen.height * 3 / 25))) {
+				hide ();
+				Amenu = actions.menu;
+			}
 		}
-		if (GUILayout.Button ("Cancel", GUILayout.Height (Screen.height * 3 / 25))) {
-			hide ();
-			devCardMenu = false;
+		else if (Amenu == actions.mono){
+			if (GUILayout.Button ("Brick", GUILayout.Height (Screen.height * 3 / 25))) {
+				monopoly(TileType.Brick);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
+			}
+			if (GUILayout.Button ("Ore", GUILayout.Height (Screen.height * 3 / 25))) {
+				monopoly(TileType.Ore);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
+			}
+			if (GUILayout.Button ("Sheep", GUILayout.Height (Screen.height * 3 / 25))) {
+				monopoly(TileType.Sheep);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
+			}
+			if (GUILayout.Button ("Wheat", GUILayout.Height (Screen.height * 3 / 25))) {
+				monopoly(TileType.Wheat);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
+			}
+			if (GUILayout.Button ("Wood", GUILayout.Height (Screen.height * 3 / 25))) {
+				monopoly(TileType.Wood);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
+			}
+			if (GUILayout.Button ("Cancel", GUILayout.Height (Screen.height * 3 / 25))) {
+				hide ();
+				Amenu = actions.menu;
+			}
+		}
+		else if (Amenu == actions.yop){
+			if (GUILayout.Button ("Brick", GUILayout.Height (Screen.height * 3 / 25))) {
+				current_player.brick++;
+				toGain--;
+			}
+			if (GUILayout.Button ("Ore", GUILayout.Height (Screen.height * 3 / 25))) {
+				current_player.ore++;
+				toGain--;
+			}
+			if (GUILayout.Button ("Sheep", GUILayout.Height (Screen.height * 3 / 25))) {
+				current_player.sheep++;
+				toGain--;
+			}
+			if (GUILayout.Button ("Wheat", GUILayout.Height (Screen.height * 3 / 25))) {
+				current_player.wheat++;
+				toGain--;
+			}
+			if (GUILayout.Button ("Wood", GUILayout.Height (Screen.height * 3 / 25))) {
+				current_player.wood++;
+				toGain--;
+			}
+			if (toGain == 0){
+				current_player.yearOfPlentyDevCard--;
+				Amenu = actions.menu;
+				hide();
+			}
+		}
+		else if (Amenu == actions.rb){
+			if (GUILayout.Button ("Add 2 Brick, 2 Wood", GUILayout.Height (Screen.height * 3 / 25))) {
+				current_player.brick+=2;
+				current_player.wood+=2;
+				current_player.roadBuildingDevCard--;
+				hide ();
+				Amenu = actions.menu;
+			}
+			if (GUILayout.Button ("Cancel", GUILayout.Height (Screen.height * 3 / 25))) {
+				hide ();
+				Amenu = actions.menu;
+			}
 		}
 		GUILayout.EndVertical ();
 		GUILayout.EndArea ();

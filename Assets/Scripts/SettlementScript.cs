@@ -7,6 +7,9 @@ public class SettlementScript : MonoBehaviour
 	public bool Player2CanBuildHere = false;
 	public bool Player3CanBuildHere = false;
 	public bool Player4CanBuildHere = false;
+	
+	private int hexes = 0;
+	private GameObject[] hexObjects = new GameObject[6];
 
 	public bool initial = false;
 
@@ -168,7 +171,7 @@ public class SettlementScript : MonoBehaviour
 			}
 		}
 	}
-	
+
 	public void Rolled(TileType tileType)
 	{
 		if(this.hasOwner == false)
@@ -221,6 +224,44 @@ public class SettlementScript : MonoBehaviour
 			{
 				player.wheat++;
 			}
+		}
+	}
+
+	public void initialResources()
+	{
+		for(int i = 0; i < hexes; i++)
+		{
+			TileType tileType = hexObjects[i].GetComponent<Hex>().tileType;
+
+			if(tileType == TileType.Brick)
+			{
+				player.brick++;
+			}
+			else if(tileType == TileType.Wood)
+			{
+				player.wood++;
+			}
+			else if(tileType == TileType.Ore)
+			{
+				player.ore++;
+			}
+			else if(tileType == TileType.Sheep)
+			{
+				player.sheep++;
+			}
+			else if(tileType == TileType.Wheat)
+			{
+				player.wheat++;
+			}
+		}
+	}
+
+	void OnCollisionEnter(Collision coll)
+	{
+		if(string.Equals(coll.gameObject.name, "Hex"))
+		{
+			hexObjects[hexes] = coll.gameObject;
+			hexes++;
 		}
 	}
 }

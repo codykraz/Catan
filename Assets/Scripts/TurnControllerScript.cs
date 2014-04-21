@@ -9,7 +9,7 @@ public class TurnControllerScript : MonoBehaviour
 	public string[] turnOrder;
 
 	public bool initialComplete = false;
-	private bool reverse = false;
+	public bool reverse = false;
 
 	private int turn = 0;
 
@@ -38,7 +38,10 @@ public class TurnControllerScript : MonoBehaviour
 	{
 		if(reverse)
 		{
-			if (turn == 0) initialComplete = true;
+			if (turn == 0)
+			{
+				initialComplete = true;
+			}
 			else
 			{
 				turn--;
