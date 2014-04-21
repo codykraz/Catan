@@ -9,6 +9,8 @@ public class DiceRollScript : MonoBehaviour {
 	{
 		diceRoll = Random.Range(1, 6) + Random.Range(1, 6);
 
+		Debug.Log (diceRoll);
+
 		if(diceRoll == 7)
 		{
 			return diceRoll;

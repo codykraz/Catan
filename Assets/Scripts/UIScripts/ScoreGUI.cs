@@ -23,7 +23,7 @@ public class ScoreGUI : MonoBehaviour {
 
 		victoryPointsTex = new Texture2D(10, 10);
 		
-		turnController = turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
+		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
 
 		if(turnController.currentPlayer == "Player1")
 		{

@@ -30,7 +30,7 @@ public class TurnControllerScript : MonoBehaviour
 		currentPlayer = turnOrder[0];
 	}
 
-	void initialNextTurn()
+	public void initialNextTurn()
 	{
 		if(reverse)
 		{
@@ -62,7 +62,7 @@ public class TurnControllerScript : MonoBehaviour
 		}
 	}
 
-	void nextTurn()
+	public void nextTurn()
 	{
 		if(turn == 3)
 		{

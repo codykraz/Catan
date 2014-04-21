@@ -45,6 +45,14 @@ public class Hex : MonoBehaviour {
 		if (script != null)
 			tileScript = script;
 	}
+
+	void OnCollisionEnter(Collision coll)
+	{
+		if(coll.gameObject.CompareTag("Settlement"))
+		{
+			addSettlement(coll.gameObject);
+		}
+	}
 	
 	public void addSettlement(GameObject settlement){
 		settlements[settlementObjects] = settlement;
