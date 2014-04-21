@@ -35,9 +35,42 @@ public class ActionsDialog : MonoBehaviour {
 
 	void monopoly(TileType t){
 		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
-		int res;
-		for (int i = 0; i < 4; i++) {
-			//players[i].GetComponent<PlayerScript>().
+		int res = 0;
+
+		if (t == TileType.Wood) {
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().wood;
+				players[i].GetComponent<PlayerScript>().wood = 0;
+			}
+			current_player.wood = res;
+		}
+		if (t == TileType.Sheep) {
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().sheep;
+				players[i].GetComponent<PlayerScript>().sheep = 0;
+			}
+			current_player.sheep = res;
+		}
+		if (t == TileType.Brick){
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().brick;
+				players[i].GetComponent<PlayerScript>().brick = 0;
+			}
+			current_player.brick = res;
+		}
+		if (t == TileType.Ore) {
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().ore;
+				players[i].GetComponent<PlayerScript>().ore = 0;
+			}
+			current_player.ore = res;
+		}
+		if (t == TileType.Wheat) {
+			for (int i = 0; i < 4; i++) {
+				res += players[i].GetComponent<PlayerScript>().wheat;
+				players[i].GetComponent<PlayerScript>().wheat = 0;
+			}
+			current_player.wheat = res;
 		}
 	}
 	
@@ -104,19 +137,34 @@ public class ActionsDialog : MonoBehaviour {
 		}
 		else if (Amenu == actions.mono){
 			if (GUILayout.Button ("Brick", GUILayout.Height (Screen.height * 3 / 25))) {
-			
+				monopoly(TileType.Brick);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
 			}
 			if (GUILayout.Button ("Ore", GUILayout.Height (Screen.height * 3 / 25))) {
-			
+				monopoly(TileType.Ore);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
 			}
 			if (GUILayout.Button ("Sheep", GUILayout.Height (Screen.height * 3 / 25))) {
-			
+				monopoly(TileType.Sheep);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
 			}
 			if (GUILayout.Button ("Wheat", GUILayout.Height (Screen.height * 3 / 25))) {
-				
+				monopoly(TileType.Wheat);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
 			}
 			if (GUILayout.Button ("Wood", GUILayout.Height (Screen.height * 3 / 25))) {
-				
+				monopoly(TileType.Wood);
+				current_player.monopolyDevCard--;
+				hide ();
+				Amenu = actions.menu;
 			}
 			if (GUILayout.Button ("Cancel", GUILayout.Height (Screen.height * 3 / 25))) {
 				hide ();
@@ -156,6 +204,7 @@ public class ActionsDialog : MonoBehaviour {
 				current_player.wood+=2;
 				current_player.roadBuildingDevCard--;
 				hide ();
+				Amenu = actions.menu;
 			}
 			if (GUILayout.Button ("Cancel", GUILayout.Height (Screen.height * 3 / 25))) {
 				hide ();
