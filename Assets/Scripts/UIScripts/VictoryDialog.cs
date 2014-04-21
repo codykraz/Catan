@@ -65,6 +65,8 @@ public class VictoryDialog : MonoBehaviour {
 		if(GUI.Button(new Rect(Screen.width/10,Screen.height*1/12,Screen.width*2/5,Screen.height*1/6), winner + " Wins!")) {
 			//END GAME FUNCTION
 			hide ();
+
+			Application.LoadLevel("Intro_C");
 		}
 	}
 
