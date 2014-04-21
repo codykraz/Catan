@@ -50,9 +50,11 @@ public class GSButtonGUI : MonoBehaviour {
 
 				if(cc.selectedObject != null && cc.selectedObject.tag == "Settlement"){
 
-					cc.selectedObject.GetComponent<SettlementScript>().buildInitial();
+					if(cc.selectedObject.GetComponent<SettlementScript>().buildInitial()){
+						turnController.initialNextTurn();
+					}
 					cc.selectedObject = null;
-					turnController.initialNextTurn();
+
 
 				}
 			}
