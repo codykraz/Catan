@@ -8,13 +8,13 @@ public class ActionsDialog : MonoBehaviour {
 	int act_winID = 2142;
 
 	float width_buffer = 20;
-	float button_height = 50;
 	TradeDialog td;
 	PlayerScript current_player;
 	
 	private TurnControllerScript turnController;
 
 	public static bool show_act = false;
+	bool devCardMenu = false;
 	
 	void Start() {
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
@@ -36,33 +36,56 @@ public class ActionsDialog : MonoBehaviour {
 		GUILayout.BeginArea (new Rect (Screen.width / 10, Screen.height / 10, Screen.width * 3 / 5, Screen.height * 4 / 5));
 		GUILayout.BeginVertical ();
 
-		if(GUILayout.Button("Build", GUILayout.Height (Screen.height* 3 /25)))
-		{
-			BuildDialog.show();
-			hide ();
+		if (!devCardMenu) {
+				if (GUILayout.Button ("Build", GUILayout.Height (Screen.height * 3 / 25))) {
+						BuildDialog.show ();
+						hide ();
+				}
+				if (GUILayout.Button ("Trade with Player", GUILayout.Height (Screen.height * 3 / 25))) {
+						TradeDialog.show ();
+						hide ();
+				}
+				if (current_player.brick >= 4 || current_player.sheep >= 4 || current_player.wheat >= 4 || current_player.wood >= 4 || current_player.ore >= 4) {
+						if (GUILayout.Button ("Exchange Resource", GUILayout.Height (Screen.height * 3 / 25))) {
+								ExchangeDialog.show ();
+								hide ();
+						}
+				}
+				if (current_player.knightDevCard > 0 || current_player.victoryDevCard > 0 || current_player.yearOfPlentyDevCard > 0 || current_player.monopolyDevCard > 0 || current_player.roadBuildingDevCard > 0) {
+						if (GUILayout.Button ("Play Development Card", GUILayout.Height (Screen.height * 3 / 25))) {
+							devCardMenu = true;
+						}
+				}
+				
 		}
-		if(GUILayout.Button("Trade with Player", GUILayout.Height (Screen.height* 3 /25)))
-		{
-			TradeDialog.show();
-			hide ();
-		}
-		if (current_player.brick >= 4 || current_player.sheep >= 4 || current_player.wheat >= 4  || current_player.wood >= 4  || current_player.ore >= 4 ){
-			if(GUILayout.Button("Exchange Resource", GUILayout.Height (Screen.height* 3 /25)))
-			{
-				ExchangeDialog.show();
-				hide ();
-			}
-		}
-		if (current_player.knightDevCard > 0 || current_player.victoryDevCard > 0 || current_player.yearOfPlentyDevCard > 0 || current_player.monopolyDevCard > 0 || current_player.roadBuildingDevCard > 0) {
-			if (GUILayout.Button ("Play Development Card", GUILayout.Height (Screen.height * 3 / 25))) {
-					//DevCard();
-			}
-		}
-		if(GUILayout.Button("Cancel", GUILayout.Height (Screen.height* 3 /25)))
-		{
-			hide ();
-		}
+		else{
+			if (current_player.knightDevCard > 0) {
+				if (GUILayout.Button ("Play Knight Card", GUILayout.Height (Screen.height * 3 / 25))) {
 
+				}
+			}
+			if (current_player.yearOfPlentyDevCard > 0){
+				if (GUILayout.Button ("Play Year of Plenty", GUILayout.Height (Screen.height * 3 / 25))) {
+
+				}
+			}
+
+			if(current_player.monopolyDevCard > 0) {
+				if (GUILayout.Button ("Play Monopoly Card", GUILayout.Height (Screen.height * 3 / 25))) {
+					
+				}
+			}
+
+			if(current_player.roadBuildingDevCard > 0){
+				if (GUILayout.Button ("Play Road Building", GUILayout.Height (Screen.height * 3 / 25))) {
+					
+				}
+			}
+		}
+		if (GUILayout.Button ("Cancel", GUILayout.Height (Screen.height * 3 / 25))) {
+			hide ();
+			devCardMenu = false;
+		}
 		GUILayout.EndVertical ();
 		GUILayout.EndArea ();
 	}
