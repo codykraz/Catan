@@ -51,7 +51,7 @@ public class SettlementScript : MonoBehaviour
 			coll.GetComponent<SettlementScript>().nearbySettlement = true;
 		}
 
-		updateRoads();
+		updateRoads(true);
 
 		checkForPorts();
 
@@ -86,7 +86,7 @@ public class SettlementScript : MonoBehaviour
 				coll.GetComponent<SettlementScript>().nearbySettlement = true;
 			}
 			
-			updateRoads();
+			updateRoads(true);
 
 			checkForPorts();
 
@@ -139,7 +139,7 @@ public class SettlementScript : MonoBehaviour
 		}
 	}
 
-	private void updateRoads()
+	public void updateRoads(bool canBuild)
 	{
 		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, 1 << LayerMask.NameToLayer("Road"));
 
@@ -147,24 +147,24 @@ public class SettlementScript : MonoBehaviour
 		{
 			if(initial)
 			{
-				coll.GetComponent<RoadScript>().initial = true;
+				coll.GetComponent<RoadScript>().initial = canBuild;
 			}
 
 			if(turnController.currentPlayer == "Player1")
 			{
-				coll.GetComponent<RoadScript>().Player1CanBuildHere = true;
+				coll.GetComponent<RoadScript>().Player1CanBuildHere = canBuild;
 			}
 			else if(turnController.currentPlayer == "Player2")
 			{
-				coll.GetComponent<RoadScript>().Player2CanBuildHere = true;
+				coll.GetComponent<RoadScript>().Player2CanBuildHere = canBuild;
 			}
 			else if(turnController.currentPlayer == "Player3")
 			{
-				coll.GetComponent<RoadScript>().Player3CanBuildHere = true;
+				coll.GetComponent<RoadScript>().Player3CanBuildHere = canBuild;
 			}
 			else if(turnController.currentPlayer == "Player4")
 			{
-				coll.GetComponent<RoadScript>().Player4CanBuildHere = true;
+				coll.GetComponent<RoadScript>().Player4CanBuildHere = canBuild;
 			}
 		}
 	}

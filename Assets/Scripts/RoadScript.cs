@@ -28,7 +28,15 @@ public class RoadScript : MonoBehaviour
 			return false;
 		}
 
-		return build();
+		bool b = build ();
+		if (b) {
+			Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, 1 << LayerMask.NameToLayer("Settlement"));
+			
+			foreach(Collider coll in colliders) {
+				coll.GetComponent<SettlementScript>().updateRoads(false);
+			}
+		}
+		return b;
 	}
 
 	public bool build()

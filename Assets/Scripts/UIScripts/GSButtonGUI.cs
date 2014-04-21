@@ -21,6 +21,7 @@ public class GSButtonGUI : MonoBehaviour {
 	private PlayerScript player4;
 
 	private CameraControler cc;
+	private bool settlement = true;
 	
 
 	void Start() {
@@ -40,24 +41,42 @@ public class GSButtonGUI : MonoBehaviour {
 	void OnGUI () 
 	{
 		GUI.skin = g;
-		if(show)
-		{
-
-			if (!turnController.initialComplete){
+		if (!turnController.initialComplete){
+			
+			
+			if (settlement){
 				GUILayout.BeginArea(new Rect(0, Screen.height * 3.5f / 5, Screen.width, Screen.height / 5));
-				GUILayout.Box("Select a position to place a settlement");
+				GUILayout.Box(turnController.currentPlayer +": Select a position to place a settlement");
 				GUILayout.EndArea();
-
 				if(cc.selectedObject != null && cc.selectedObject.tag == "Settlement"){
-
+					
 					if(cc.selectedObject.GetComponent<SettlementScript>().buildInitial()){
-						turnController.initialNextTurn();
+						settlement = false;
 					}
 					cc.selectedObject = null;
-
-
+					
+					
+				}
+				
+			}
+			else {
+				GUILayout.BeginArea(new Rect(0, Screen.height * 3.5f / 5, Screen.width, Screen.height / 5));
+				GUILayout.Box(turnController.currentPlayer +": Select a position to place a road");
+				GUILayout.EndArea();
+				if(cc.selectedObject != null && cc.selectedObject.tag == "Road"){
+					
+					if(cc.selectedObject.GetComponent<RoadScript>().buildInitial()){
+						turnController.initialNextTurn();
+						settlement = true;
+					}
+					cc.selectedObject = null;
+					
+					
 				}
 			}
+		}
+		else if(show)
+		{
 
 
 			if(turnStart)
@@ -73,7 +92,7 @@ public class GSButtonGUI : MonoBehaviour {
 					}
 				}
 
-				if(GUI.Button(new Rect(Screen.width/2+width_buffer/2,Screen.height-(button_height+width_buffer),Screen.width/2-3*width_buffer/2,button_height), "Roll Dice")) {
+				if(GUI.Button(new Rect(Screen.width/2+width_buffer/2,Screen.height-(button_height+width_buffer),Screen.width/2-3*width_buffer/2,button_height), turnController.currentPlayer +": Roll Dice")) {
 					if(dice.roll() == 7)
 					{
 						discard();
