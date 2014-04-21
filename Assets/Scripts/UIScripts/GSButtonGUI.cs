@@ -223,106 +223,112 @@ public class GSButtonGUI : MonoBehaviour {
 		int rand = 0;
 
 		int half = player1.handSize / 2;
-
-		while(player1.handSize > half)
-		{
-			rand = Random.Range(0, 5);
-			
-			if(rand == 0 && player1.wood > 0)
+		if(player1.handSize > 7){
+			while(player1.handSize > half)
 			{
-				player1.wood--;
-				player1.handSize--;
-			}
-			else if(rand == 1 && player1.ore > 0)
-			{
-				player1.ore--;
-				player1.handSize--;
-			}
-			else if(rand == 2 && player1.sheep > 0)
-			{
-				player1.sheep--;
-				player1.handSize--;
-			}
-			else if(rand == 3 && player1.wheat > 0)
-			{
-				player1.wheat--;
-				player1.handSize--;
-			}
-			else if(rand == 4 && player1.brick > 0)
-			{
-				player1.brick--;
-				player1.handSize--;
+				rand = Random.Range(0, 5);
+				
+				if(rand == 0 && player1.wood > 0)
+				{
+					player1.wood--;
+					player1.handSize--;
+				}
+				else if(rand == 1 && player1.ore > 0)
+				{
+					player1.ore--;
+					player1.handSize--;
+				}
+				else if(rand == 2 && player1.sheep > 0)
+				{
+					player1.sheep--;
+					player1.handSize--;
+				}
+				else if(rand == 3 && player1.wheat > 0)
+				{
+					player1.wheat--;
+					player1.handSize--;
+				}
+				else if(rand == 4 && player1.brick > 0)
+				{
+					player1.brick--;
+					player1.handSize--;
+				}
 			}
 		}
 		
 		half = player2.handSize / 2;
-		
-		while(player2.handSize > half)
-		{
-			rand = Random.Range(0, 5);
-			
-			if(rand == 0 && player2.wood > 0)
+
+		if(player2.handSize > 7){
+			while(player2.handSize > half)
 			{
-				player2.wood--;
-				player2.handSize--;
-			}
-			else if(rand == 1 && player2.ore > 0)
-			{
-				player2.ore--;
-				player2.handSize--;
-			}
-			else if(rand == 2 && player2.sheep > 0)
-			{
-				player2.sheep--;
-				player2.handSize--;
-			}
-			else if(rand == 3 && player2.wheat > 0)
-			{
-				player2.wheat--;
-				player2.handSize--;
-			}
-			else if(rand == 4 && player2.brick > 0)
-			{
-				player2.brick--;
-				player2.handSize--;
+				rand = Random.Range(0, 5);
+				
+				if(rand == 0 && player2.wood > 0)
+				{
+					player2.wood--;
+					player2.handSize--;
+				}
+				else if(rand == 1 && player2.ore > 0)
+				{
+					player2.ore--;
+					player2.handSize--;
+				}
+				else if(rand == 2 && player2.sheep > 0)
+				{
+					player2.sheep--;
+					player2.handSize--;
+				}
+				else if(rand == 3 && player2.wheat > 0)
+				{
+					player2.wheat--;
+					player2.handSize--;
+				}
+				else if(rand == 4 && player2.brick > 0)
+				{
+					player2.brick--;
+					player2.handSize--;
+				}
 			}
 		}
 
 		half = player3.handSize / 2;
-		
-		while(player3.handSize > half)
-		{
-			rand = Random.Range(0, 5);
-			
-			if(rand == 0 && player3.wood > 0)
+
+		if(player3.handSize>7){
+			while(player3.handSize > half)
 			{
-				player3.wood--;
-				player3.handSize--;
-			}
-			else if(rand == 1 && player3.ore > 0)
-			{
-				player3.ore--;
-				player3.handSize--;
-			}
-			else if(rand == 2 && player3.sheep > 0)
-			{
-				player3.sheep--;
-				player3.handSize--;
-			}
-			else if(rand == 3 && player3.wheat > 0)
-			{
-				player3.wheat--;
-				player3.handSize--;
-			}
-			else if(rand == 4 && player3.brick > 0)
-			{
-				player3.brick--;
-				player3.handSize--;
+				rand = Random.Range(0, 5);
+				
+				if(rand == 0 && player3.wood > 0)
+				{
+					player3.wood--;
+					player3.handSize--;
+				}
+				else if(rand == 1 && player3.ore > 0)
+				{
+					player3.ore--;
+					player3.handSize--;
+				}
+				else if(rand == 2 && player3.sheep > 0)
+				{
+					player3.sheep--;
+					player3.handSize--;
+				}
+				else if(rand == 3 && player3.wheat > 0)
+				{
+					player3.wheat--;
+					player3.handSize--;
+				}
+				else if(rand == 4 && player3.brick > 0)
+				{
+					player3.brick--;
+					player3.handSize--;
+				}
 			}
 		}
 		
 		half = player4.handSize / 2;
-		
+
+		if(player4.handSize > 7){
 		while(player4.handSize > half)
 		{
 			rand = Random.Range(0, 5);
@@ -353,5 +359,6 @@ public class GSButtonGUI : MonoBehaviour {
 				player4.handSize--;
 			}
 		}
+	}
 	}
 }
