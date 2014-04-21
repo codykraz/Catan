@@ -25,6 +25,13 @@ public class ScoreGUI : MonoBehaviour {
 
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
 
+
+	}
+
+	void OnGUI () {
+		GUI.skin = g;
+		float resources_box_width = Screen.width*3/4;
+		float resources_box_unit = resources_box_width/26;
 		if(string.Equals(turnController.currentPlayer, "Player1"))
 		{
 			currentPlayer = player1;
@@ -41,47 +48,43 @@ public class ScoreGUI : MonoBehaviour {
 		{
 			currentPlayer = player4;
 		}
-	}
+		GUI.Box (new Rect (0,0,Screen.width+10,resources_box_unit*5),"");
 
-	void OnGUI () {
-		GUI.skin = g;
-		float resources_box_width = Screen.width*3/4;
-		float resources_box_unit = resources_box_width/26;
-		
-		//GUI.Box (new Rect (-5,-5,Screen.width+10,resources_box_unit*6+10), "");
-		
-		GUI.Label (new Rect (resources_box_unit*1, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Wood"));
-		GUI.Label (new Rect (resources_box_unit*1, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.wood.ToString());
-		
-		GUI.Label (new Rect (resources_box_unit*6, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Ore"));
-		GUI.Label (new Rect (resources_box_unit*6, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.ore.ToString());
-		
-		GUI.Label (new Rect (resources_box_unit*11, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Brick"));
-		GUI.Label (new Rect (resources_box_unit*11, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.brick.ToString());
-		
-		GUI.Label (new Rect (resources_box_unit*16, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Wheat"));
-		GUI.Label (new Rect (resources_box_unit*16, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.wheat.ToString());
-		
-		GUI.Label (new Rect (resources_box_unit*21, 5, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Sheep"));
-		GUI.Label (new Rect (resources_box_unit*21, 5, resources_box_unit*5, resources_box_unit*5), currentPlayer.sheep.ToString());
+		GUI.contentColor = Color.white;
+		GUI.Label (new Rect (resources_box_unit*0, 0, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Wood"));
+		GUI.Label (new Rect (resources_box_unit*5, 0, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Ore"));
+		GUI.Label (new Rect (resources_box_unit*10, 0, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Brick"));
+		GUI.Label (new Rect (resources_box_unit*15, 0, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Wheat"));
+		GUI.Label (new Rect (resources_box_unit*20, 0, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Sheep"));
+		GUI.contentColor = currentPlayer.playerColor;
+		GUI.Label (new Rect (resources_box_unit*0, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.wood.ToString()+ "\nWood");
+		GUI.Label (new Rect (resources_box_unit*5, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.ore.ToString()+ "\nOre");
+		GUI.Label (new Rect (resources_box_unit*10, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.brick.ToString()+"\nBrick");
+		GUI.Label (new Rect (resources_box_unit*15, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.wheat.ToString()+"\nWheat");
+		GUI.Label (new Rect (resources_box_unit*20, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.sheep.ToString()+"\nSheep");
 		
 		// Current player's score on top right
 		float score_box_width = Screen.width*1/4;
 		float score_box_unit = score_box_width/10;
 		
 		//GUI.Box (new Rect (Screen.width - score_box_width, -5, score_box_width+5, 15+score_box_unit*17), "");
-		
+
+		GUI.contentColor = player1.playerColor;
 		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*1, score_box_unit*4, score_box_unit*4), player1.victoryPoints.ToString());
 		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*1, score_box_unit*4, score_box_unit*4), victoryPointsTex);
 		
-		// Other player's score's below that
+		GUI.contentColor = player2.playerColor;
 		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*5, score_box_unit*4, score_box_unit*4), player2.victoryPoints.ToString());
 		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*5, score_box_unit*4, score_box_unit*4), victoryPointsTex);
-		
+
+		GUI.contentColor = player3.playerColor;
 		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*9, score_box_unit*4, score_box_unit*4), player3.victoryPoints.ToString());
 		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*9, score_box_unit*4, score_box_unit*4), victoryPointsTex);
-		
+
+		GUI.contentColor = player4.playerColor;
 		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*13, score_box_unit*4, score_box_unit*4), player4.victoryPoints.ToString());
 		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*13, score_box_unit*4, score_box_unit*4), victoryPointsTex);
+	
+		GUI.contentColor = Color.white;
 	}
 }

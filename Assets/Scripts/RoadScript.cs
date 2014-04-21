@@ -46,10 +46,10 @@ public class RoadScript : MonoBehaviour
 			return false;
 		}
 
-		if((turnController.currentPlayer == "Player1" && Player1CanBuildHere == true)
-		   || (turnController.currentPlayer == "Player2" && Player2CanBuildHere == true)
-		   || (turnController.currentPlayer == "Player3" && Player3CanBuildHere == true)
-		   || (turnController.currentPlayer == "Player4" && Player4CanBuildHere == true))
+		if((string.Equals(turnController.currentPlayer, "Player1") && Player1CanBuildHere == true)
+		   || (string.Equals(turnController.currentPlayer, "Player2") && Player2CanBuildHere == true)
+		   || (string.Equals(turnController.currentPlayer, "Player3") && Player3CanBuildHere == true)
+		   || (string.Equals(turnController.currentPlayer, "Player4") && Player4CanBuildHere == true))
 		{
 
 			this.hasOwner = true;
