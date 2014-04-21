@@ -9,9 +9,12 @@ public class TradeDialog : MonoBehaviour {
 
 	PlayerScript current_player, partner;	
 	public string[] playerList;
+	Texture2D current_pbar;
+	public Texture2D[] pbarList;
 	int iterator, ignore;
 	int[] res_amounts = new int[10];
 
+	Texture2D col1,col2,col3,col4;
 	Texture wood_resource_tex, brick_resource_tex, ore_resource_tex, wheat_resource_tex, sheep_resource_tex;
 	
 	void Start() {
@@ -27,6 +30,43 @@ public class TradeDialog : MonoBehaviour {
 
 		playerList = new string[] {"Player1", "Player2", "Player3", "Player4"};
 		iterator = 0;
+
+		PlayerScript p1 = GameObject.Find ("Player1").GetComponent<PlayerScript> ();
+		PlayerScript p2 = GameObject.Find ("Player2").GetComponent<PlayerScript> ();
+		PlayerScript p3 = GameObject.Find ("Player3").GetComponent<PlayerScript> ();
+		PlayerScript p4 = GameObject.Find ("Player4").GetComponent<PlayerScript> ();
+
+		col1 = new Texture2D (128, 32);
+		for(int i = 0; i<col1.height; i++){
+			for(int j = 0; j<col1.width; j++){
+				col1.SetPixel(j,i, p1.playerColor);
+			}
+		}
+		col1.Apply ();
+		col2 = new Texture2D (128, 32);
+		for(int i = 0; i<col1.height; i++){
+			for(int j = 0; j<col1.width; j++){
+				col2.SetPixel(j,i, p2.playerColor);
+			}
+		}
+		col2.Apply ();
+		col3 = new Texture2D (128, 32);
+		for(int i = 0; i<col1.height; i++){
+			for(int j = 0; j<col1.width; j++){
+				col3.SetPixel(j,i, p3.playerColor);
+			}
+		}
+		col3.Apply ();
+		col4 = new Texture2D (128, 32);
+		for(int i = 0; i<col1.height; i++){
+			for(int j = 0; j<col1.width; j++){
+				col4.SetPixel(j,i, p4.playerColor);
+			}
+		}
+		col4.Apply ();
+
+		pbarList = new Texture2D[]{col1,col2,col3,col4};
+		current_pbar = col1;
 	}
 	// Use this for initialization
 	void OnGUI () {
@@ -44,15 +84,23 @@ public class TradeDialog : MonoBehaviour {
 		{
 		case "Player1":
 			playerList = new string[] {"Player2", "Player3", "Player4"};
+			pbarList = new Texture2D[] {col2,col3,col4};
+			current_pbar = col1;
 			break;
 		case "Player2":
 			playerList = new string[] {"Player1", "Player3", "Player4"};
+			current_pbar = col2;
+			pbarList = new Texture2D[] {col1,col3,col4};
 			break;
 		case "Player3":
 			playerList = new string[] {"Player1", "Player2", "Player4"};
+			current_pbar = col3;
+			pbarList = new Texture2D[] {col1,col2,col4};
 			break;
 		case "Player4":
 			playerList = new string[] {"Player1", "Player2", "Player3"};
+			current_pbar = col4;
+			pbarList = new Texture2D[] {col1,col2,col3};
 			break;
 		default:
 			break;
@@ -63,7 +111,9 @@ public class TradeDialog : MonoBehaviour {
 		GUILayout.BeginArea (new Rect (Screen.width / 40, Screen.height/23, Screen.width * 9 / 10, Screen.height * 9 / 15));
 		GUILayout.BeginHorizontal ();
 		GUILayout.BeginVertical ();
-		GUILayout.Label (current_player.name);
+		if(GUILayout.Button (current_pbar, GUILayout.Height (Screen.height*4/96),GUILayout.Width (Screen.width*71/176))) {
+
+		}
 		GUILayout.BeginHorizontal ();
 		if(GUILayout.Button (wood_resource_tex, GUILayout.Height (Screen.height*7/96),GUILayout.Width (Screen.width*1/10))) {
 		
@@ -194,7 +244,7 @@ public class TradeDialog : MonoBehaviour {
 
 		GUILayout.BeginVertical ();
 		GUILayout.BeginHorizontal ();
-		if(GUILayout.Button (partner.name, GUILayout.Height (Screen.height*3/96),GUILayout.Width (Screen.width*35/88))) {
+		if(GUILayout.Button (pbarList[iterator], GUILayout.Height (Screen.height*4/96),GUILayout.Width (Screen.width*71/176))) {
 			iterator++;
 			if(iterator>=3){
 				iterator = 0;
