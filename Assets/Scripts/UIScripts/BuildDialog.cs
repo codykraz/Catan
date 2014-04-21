@@ -7,6 +7,8 @@ public class BuildDialog : MonoBehaviour {
 	float pic_width = 70;
 	int build_bldID = 1026;
 	int res_alert2_winID= 7320;
+	int build2ID = 92013013;
+	int pos_alert2_winID = 819074981;
 	PlayerScript current_player;
 	
 	float width_buffer = 20;
@@ -49,28 +51,33 @@ public class BuildDialog : MonoBehaviour {
 			GUILayout.Box("Select a position to place a " + buildingName);
 			GUILayout.EndArea();
 
+			if(GUI.Button(new Rect(Screen.width/2+width_buffer/2,Screen.height-(button_height+width_buffer),Screen.width/2-3*width_buffer/2,button_height), "Cancel")) 
+			{
+				selectBuilding = false;
+			}
+
 			if(camera.selectedObject != null)
 			{
 				if(buildingName == "Road" && camera.selectedObject.tag == "Road")
 				{
-					if(camera.selectedObject.GetComponent<RoadScript>().build())
-					{
-						selectBuilding = false;
-					}
+						if(camera.selectedObject.GetComponent<RoadScript>().build())
+						{
+							selectBuilding = false;
+						}
 				}
 				else if(buildingName == "Settlement" && camera.selectedObject.tag == "Settlement")
 				{
-					if(camera.selectedObject.GetComponent<SettlementScript>().build())
-					{
-						selectBuilding = false;
-					}
+						if(camera.selectedObject.GetComponent<SettlementScript>().build())
+						{
+							selectBuilding = false;
+						}
 				}
 				else if(buildingName == "City" && camera.selectedObject.tag == "Settlement")
 				{
-					if(camera.selectedObject.GetComponent<SettlementScript>().buildCity())
-					{
-						selectBuilding = false;
-					}
+						if(camera.selectedObject.GetComponent<SettlementScript>().buildCity())
+						{
+							selectBuilding = false;
+						}
 				}
 			}
 		}
