@@ -200,29 +200,19 @@ public class ExchangeDialog : MonoBehaviour {
 				switch(take_resource)
 				{
 				case "Wood":
-					if(current_player.wood>=(itake)){
 						current_player.wood+=(itake);
-					}
 					break;
 				case "Brick":
-					if(current_player.brick>=(itake)){
 						current_player.brick+=(itake);
-					}
 					break;
 				case "Sheep":
-					if(current_player.sheep>=(itake)){
 						current_player.sheep+=(itake);
-					}
 					break;
 				case "Wheat":
-					if(current_player.wheat>=(itake)){
 						current_player.wheat+=(itake);
-					}
 					break;
 				case "Ore":
-					if(current_player.ore>=(itake)){
 						current_player.ore+=(itake);
-					}
 					break;
 				default:
 					break;
