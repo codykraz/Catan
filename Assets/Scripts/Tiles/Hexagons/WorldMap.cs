@@ -12,7 +12,8 @@ public class WorldMap : MonoBehaviour {
 	public List<TileType> board;
 	public List<int> numbers;
 	
-	//public HashSet<Vector3> intersections;
+	public HashSet<Vector3> intersections;
+	public HashSet<Vector3> edges30, edges60, edges;
 
     protected Dictionary<Vector2, Hex> hexes { get; set; }
 
@@ -60,7 +61,11 @@ public class WorldMap : MonoBehaviour {
 			2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12
 		};
 		
-		//intersections = new HashSet<Vector3>();
+		intersections = new HashSet<Vector3>();
+		edges = new HashSet<Vector3> ();
+		edges30 = new HashSet<Vector3>();
+		edges60 = new HashSet<Vector3>();
+
 		int hexCount = 0;
 		int numCount = 0;
         hexes = new Dictionary<Vector2, Hex>();
@@ -72,14 +77,22 @@ public class WorldMap : MonoBehaviour {
 	            Vector2 position = new Vector2(x, y);
 	            Vector3 pos = ToPixel(position);
 	  
-	            /*
+	            
 	            intersections.Add(new Vector3((float)Math.Round(pos.x, 3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z+HexGlobals.Radius,3)));
 	            intersections.Add(new Vector3((float)Math.Round(pos.x, 3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z-HexGlobals.Radius,3)));//* Mathf.Sqrt(3)/2)
 	            intersections.Add(new Vector3((float)Math.Round(pos.x+HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z+HexGlobals.Radius/2,3)));
 	            intersections.Add(new Vector3((float)Math.Round(pos.x+HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z-HexGlobals.Radius/2,3)));
 	            intersections.Add(new Vector3((float)Math.Round(pos.x-HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z+HexGlobals.Radius/2,3)));
 	            intersections.Add(new Vector3((float)Math.Round(pos.x-HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z-HexGlobals.Radius/2,3)));
-	            */
+
+				edges.Add(new Vector3((float)Math.Round(pos.x+HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z,3)));
+	            edges.Add(new Vector3((float)Math.Round(pos.x-HexGlobals.Radius* Mathf.Sqrt(3)/2,3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z,3)));
+				edges60.Add(new Vector3((float)Math.Round(pos.x+2*Mathf.Sqrt(3),3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z+6,3)));
+	            edges30.Add(new Vector3((float)Math.Round(pos.x+2*Mathf.Sqrt(3),3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z-6,3)));
+	            edges30.Add(new Vector3((float)Math.Round(pos.x-2*Mathf.Sqrt(3),3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z+6,3)));
+	            edges60.Add(new Vector3((float)Math.Round(pos.x-2*Mathf.Sqrt(3),3), (float)Math.Round(pos.y,3), (float)Math.Round(pos.z-6,3)));
+
+				 
 
 	            GameObject hexObject = new GameObject();
 
@@ -105,12 +118,34 @@ public class WorldMap : MonoBehaviour {
 
 		    }
 		}
-		/*
+
 		IEnumerable<Vector3> distinctIntersections = intersections.Distinct();
+		IEnumerable<Vector3> distinctEdges = edges.Distinct();
+		IEnumerable<Vector3> distinctEdges30 = edges30.Distinct();
+		IEnumerable<Vector3> distinctEdges60 = edges60.Distinct();
+
+
 		foreach (Vector3 position in distinctIntersections){
 			GameObject settlement = (GameObject)Instantiate(Resources.Load("Settlement"));
 			settlement.transform.position = position;
-		}*/
+		}
+
+		foreach (Vector3 position in distinctEdges) {
+			GameObject road = (GameObject)Instantiate(Resources.Load("Road"));
+			road.transform.position = position;
+			road.transform.eulerAngles = new Vector3(0,0,0);
+		}
+		foreach (Vector3 position in distinctEdges30) {
+			GameObject road = (GameObject)Instantiate(Resources.Load("Road"));
+			road.transform.position = position;
+			road.transform.eulerAngles = new Vector3(0,60,0);
+		}
+		foreach (Vector3 position in distinctEdges60) {
+			GameObject road = (GameObject)Instantiate(Resources.Load("Road"));
+			road.transform.position = position;
+			road.transform.eulerAngles = new Vector3(0,-60,0);
+		}
+
 	}
 
 	public List<Vector2> GetNeighbors(int x, int y) {
