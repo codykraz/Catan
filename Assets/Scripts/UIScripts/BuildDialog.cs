@@ -56,6 +56,7 @@ public class BuildDialog : MonoBehaviour {
 
 			if(GUI.Button(new Rect(Screen.width/2,Screen.height-(button_height),Screen.width/2,button_height), "Cancel")) 
 			{
+				gs.show = true;
 				selectBuilding = false;
 			}
 
