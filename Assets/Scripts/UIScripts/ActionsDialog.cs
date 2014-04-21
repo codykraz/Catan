@@ -45,7 +45,7 @@ public class ActionsDialog : MonoBehaviour {
 						TradeDialog.show ();
 						hide ();
 				}
-				if (current_player.brick >= 4 || current_player.sheep >= 4 || current_player.wheat >= 4 || current_player.wood >= 4 || current_player.ore >= 4) {
+			if (current_player.brick >= current_player.brickTradeIn || current_player.sheep >= current_player.sheepTradeIn || current_player.wheat >= current_player.wheatTradeIn || current_player.wood >= current_player.woodTradeIn || current_player.ore >= current_player.oreTradeIn) {
 						if (GUILayout.Button ("Exchange With Bank", GUILayout.Height (Screen.height * 3 / 25))) {
 								ExchangeDialog.show ();
 								hide ();
