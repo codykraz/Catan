@@ -7,6 +7,7 @@ public class ActionsDialog : MonoBehaviour {
 
 	float width_buffer = 20;
 	float button_height = 50;
+	TradeDialog td;
 
 	public static bool show_act = false;
 	
@@ -33,7 +34,7 @@ public class ActionsDialog : MonoBehaviour {
 		}
 		if(GUILayout.Button("Trade with Player", GUILayout.Height (Screen.height* 3 /25)))
 		{
-			//TradeDialog.show ();
+			TradeDialog.show();
 			hide ();
 		}
 		if(GUILayout.Button("Exchange Resource", GUILayout.Height (Screen.height* 3 /25)))
