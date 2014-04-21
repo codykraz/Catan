@@ -46,8 +46,6 @@ public class SettlementScript : MonoBehaviour
 
 		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 12, 1 << LayerMask.NameToLayer("Settlement"));
 
-		Debug.Log (colliders.Length);
-
 		foreach(Collider coll in colliders)
 		{
 			coll.GetComponent<SettlementScript>().nearbySettlement = true;
@@ -134,8 +132,6 @@ public class SettlementScript : MonoBehaviour
 	private void checkForPorts()
 	{
 		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, 1 << LayerMask.NameToLayer("Port"));
-
-		Debug.Log (colliders.Length);
 
 		foreach(Collider coll in colliders)
 		{

@@ -48,7 +48,7 @@ public class GSButtonGUI : MonoBehaviour {
 				GUILayout.Box("Select a position to place a settlement");
 				GUILayout.EndArea();
 
-				if(cc.selectedObject.tag == "Settlement"){
+				if(cc.selectedObject != null && cc.selectedObject.tag == "Settlement"){
 
 					cc.selectedObject.GetComponent<SettlementScript>().buildInitial();
 					cc.selectedObject = null;
