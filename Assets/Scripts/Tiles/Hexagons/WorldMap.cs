@@ -128,22 +128,26 @@ public class WorldMap : MonoBehaviour {
 		foreach (Vector3 position in distinctIntersections){
 			GameObject settlement = (GameObject)Instantiate(Resources.Load("Settlement"));
 			settlement.transform.position = position;
+			settlement.transform.parent=this.transform;
 		}
 
 		foreach (Vector3 position in distinctEdges) {
 			GameObject road = (GameObject)Instantiate(Resources.Load("Road"));
 			road.transform.position = position;
 			road.transform.eulerAngles = new Vector3(0,0,0);
+			road.transform.parent=this.transform;
 		}
 		foreach (Vector3 position in distinctEdges30) {
 			GameObject road = (GameObject)Instantiate(Resources.Load("Road"));
 			road.transform.position = position;
 			road.transform.eulerAngles = new Vector3(0,60,0);
+			road.transform.parent=this.transform;
 		}
 		foreach (Vector3 position in distinctEdges60) {
 			GameObject road = (GameObject)Instantiate(Resources.Load("Road"));
 			road.transform.position = position;
 			road.transform.eulerAngles = new Vector3(0,-60,0);
+			road.transform.parent=this.transform;
 		}
 
 	}
