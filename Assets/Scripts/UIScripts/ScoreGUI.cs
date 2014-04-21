@@ -21,7 +21,6 @@ public class ScoreGUI : MonoBehaviour {
 		player3 = GameObject.Find("Player3").GetComponent<PlayerScript>();
 		player4 = GameObject.Find("Player4").GetComponent<PlayerScript>();
 
-		
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
 
 		if(turnController.currentPlayer == "Player1")
