@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class VictoryDialog : MonoBehaviour {
+	public GUISkin g;
+
 	float pic_width = 70;
 	int vic_winID = 1337;
 	Texture AMan;
@@ -15,6 +17,7 @@ public class VictoryDialog : MonoBehaviour {
 	// Use this for initialization
 	void OnGUI () {
 		//Background
+		GUI.skin = g;
 		if (show_vic){
 			GUI.ModalWindow (vic_winID, new Rect (Screen.width / 5, Screen.height / 3, Screen.width * 3 / 5, Screen.height / 3), ModalContents, "Victory!");
 		}

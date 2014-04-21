@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class ActionsDialog : MonoBehaviour {
+	public GUISkin g;
+
 	float pic_width = 70;
 	int act_winID = 2142;
 
@@ -16,6 +18,7 @@ public class ActionsDialog : MonoBehaviour {
 	
 	// Use this for initialization
 	void OnGUI () {
+		GUI.skin = g;
 		//Background
 		if (show_act){
 			GUI.ModalWindow (act_winID, new Rect (Screen.width / 10, Screen.height / 10, Screen.width * 4 / 5, Screen.height * 4 / 5), ModalContents, "Actions");

@@ -38,7 +38,7 @@ public class RoadScript : MonoBehaviour
 			this.renderer.material.color = player.playerColor;
 			this.renderer.enabled = true;
 
-			Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, LayerMask.NameToLayer("Settlement"));
+			Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, 1 << LayerMask.NameToLayer("Settlement"));
 			
 			foreach(Collider coll in colliders)
 			{
@@ -60,7 +60,7 @@ public class RoadScript : MonoBehaviour
 				}
 			}
 
-			Collider[] colliders2 = Physics.OverlapSphere(this.transform.position, 12, LayerMask.NameToLayer("Road"));
+			Collider[] colliders2 = Physics.OverlapSphere(this.transform.position, 12, 1 << LayerMask.NameToLayer("Road"));
 
 			foreach(Collider coll in colliders2)
 			{

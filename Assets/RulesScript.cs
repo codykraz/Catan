@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class RulesScript : MonoBehaviour {
+	public GUISkin g;
+
 	private int rule = 0;
 
 	public Texture2D R1, R2, R3;
