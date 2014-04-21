@@ -110,27 +110,27 @@ public class GSButtonGUI : MonoBehaviour {
 		{
 			rand = Random.Range(0, 5);
 			
-			if(rand == 0)
+			if(rand == 0 && player1.wood > 0)
 			{
 				player1.wood--;
 				player1.handSize--;
 			}
-			else if(rand == 1)
+			else if(rand == 1 && player1.ore > 0)
 			{
 				player1.ore--;
 				player1.handSize--;
 			}
-			else if(rand == 2)
+			else if(rand == 2 && player1.sheep > 0)
 			{
 				player1.sheep--;
 				player1.handSize--;
 			}
-			else if(rand == 3)
+			else if(rand == 3 && player1.wheat > 0)
 			{
 				player1.wheat--;
 				player1.handSize--;
 			}
-			else if(rand == 4)
+			else if(rand == 4 && player1.brick > 0)
 			{
 				player1.brick--;
 				player1.handSize--;
@@ -143,27 +143,27 @@ public class GSButtonGUI : MonoBehaviour {
 		{
 			rand = Random.Range(0, 5);
 			
-			if(rand == 0)
+			if(rand == 0 && player2.wood > 0)
 			{
 				player2.wood--;
 				player2.handSize--;
 			}
-			else if(rand == 1)
+			else if(rand == 1 && player2.ore > 0)
 			{
 				player2.ore--;
 				player2.handSize--;
 			}
-			else if(rand == 2)
+			else if(rand == 2 && player2.sheep > 0)
 			{
 				player2.sheep--;
 				player2.handSize--;
 			}
-			else if(rand == 3)
+			else if(rand == 3 && player2.wheat > 0)
 			{
 				player2.wheat--;
 				player2.handSize--;
 			}
-			else if(rand == 4)
+			else if(rand == 4 && player2.brick > 0)
 			{
 				player2.brick--;
 				player2.handSize--;
@@ -176,27 +176,27 @@ public class GSButtonGUI : MonoBehaviour {
 		{
 			rand = Random.Range(0, 5);
 			
-			if(rand == 0)
+			if(rand == 0 && player3.wood > 0)
 			{
 				player3.wood--;
 				player3.handSize--;
 			}
-			else if(rand == 1)
+			else if(rand == 1 && player3.ore > 0)
 			{
 				player3.ore--;
 				player3.handSize--;
 			}
-			else if(rand == 2)
+			else if(rand == 2 && player3.sheep > 0)
 			{
 				player3.sheep--;
 				player3.handSize--;
 			}
-			else if(rand == 3)
+			else if(rand == 3 && player3.wheat > 0)
 			{
 				player3.wheat--;
 				player3.handSize--;
 			}
-			else if(rand == 4)
+			else if(rand == 4 && player3.brick > 0)
 			{
 				player3.brick--;
 				player3.handSize--;
@@ -209,27 +209,27 @@ public class GSButtonGUI : MonoBehaviour {
 		{
 			rand = Random.Range(0, 5);
 			
-			if(rand == 0)
+			if(rand == 0 && player4.wood > 0)
 			{
 				player4.wood--;
 				player4.handSize--;
 			}
-			else if(rand == 1)
+			else if(rand == 1 && player4.ore > 0)
 			{
 				player4.ore--;
 				player4.handSize--;
 			}
-			else if(rand == 2)
+			else if(rand == 2 && player4.sheep > 0)
 			{
 				player4.sheep--;
 				player4.handSize--;
 			}
-			else if(rand == 3)
+			else if(rand == 3 && player4.wheat > 0)
 			{
 				player4.wheat--;
 				player4.handSize--;
 			}
-			else if(rand == 4)
+			else if(rand == 4 && player4.brick > 0)
 			{
 				player4.brick--;
 				player4.handSize--;

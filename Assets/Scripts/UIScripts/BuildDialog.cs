@@ -11,25 +11,66 @@ public class BuildDialog : MonoBehaviour {
 	float button_height = 50;
 
 	Texture AMan;
-	
+
+	private bool selectBuilding = false;
+	private string buildingName = "";
+
 	public static bool show_bld = false;
 	public static bool res_alert_exc = false;
 
 	private TurnControllerScript turnController;
+	private CameraControler camera;
+	private deck Deck;
 	
 	void Start() {
 		AMan = Resources.Load ("A-Man", typeof(Texture)) as Texture;
+
+		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
+		camera = GameObject.Find ("Main Camera").GetComponent<CameraControler>();
+		Deck = GameObject.Find("Deck").GetComponent<deck>();
 		
 	}
 	
 	// Use this for initialization
 	void OnGUI () {
 		//Background
-		if (show_bld){
-			GUI.ModalWindow (build_bldID, new Rect (Screen.width / 10, Screen.height / 10, Screen.width * 4 / 5, Screen.height * 4 / 5), ModalContents, "Build");
-		}
+		
 		if(res_alert_exc){
 			GUI.ModalWindow (res_alert2_winID, new Rect (Screen.width / 5, Screen.height / 6, Screen.width * 3 / 5, Screen.height *2/ 3), ResAlrtContents, "Not Enough Resources");	
+		}
+		else if (show_bld){
+			GUI.ModalWindow (build_bldID, new Rect (Screen.width / 10, Screen.height / 10, Screen.width * 4 / 5, Screen.height * 4 / 5), ModalContents, "Build");
+		}
+		else if(selectBuilding)
+		{
+			GUILayout.BeginArea(new Rect(0, Screen.height * 3.5f / 5, Screen.width, Screen.height / 5));
+			GUILayout.Box("Select a position to place a " + buildingName);
+			GUILayout.EndArea();
+
+			if(camera.selectedObject != null)
+			{
+				if(buildingName == "Road" && camera.selectedObject.tag == "Road")
+				{
+					if(camera.selectedObject.GetComponent<RoadScript>().build())
+					{
+						selectBuilding = false;
+					}
+				}
+				else if(buildingName == "Settlement" && camera.selectedObject.tag == "Settlement")
+				{
+					if(camera.selectedObject.GetComponent<SettlementScript>().build())
+					{
+						selectBuilding = false;
+					}
+				}
+				else if(buildingName == "City" && camera.selectedObject.tag == "Settlement")
+				{
+					if(camera.selectedObject.GetComponent<SettlementScript>().buildCity())
+					{
+						selectBuilding = false;
+					}
+				}
+			}
 		}
 	}
 	
@@ -38,17 +79,24 @@ public class BuildDialog : MonoBehaviour {
 		GUILayout.BeginArea (new Rect (Screen.width / 10, Screen.height * 7 / 80, Screen.width * 3 / 5, Screen.height * 4 / 5));
 		GUILayout.BeginVertical ();
 
-		//current_player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
+		current_player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
 
 		//Road
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("Road\nCost: 1 Wood, 1 Brick");
 		if (GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25))) {
-			/*if(current_player.wood < 1 || current_player.brick < 1)
+			if(current_player.wood < 1 || current_player.brick < 1)
 			{
 				res_alert_exc = true;
 				hide();
-			}*/
+			}
+			else
+			{
+				selectBuilding = true;
+				camera.selectedObject = null;
+				buildingName = "Road";
+				hide();
+			}
 		}
 		GUILayout.EndHorizontal ();
 
@@ -56,11 +104,18 @@ public class BuildDialog : MonoBehaviour {
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("Settlement\nCost: 1 Wood, 1 Brick, 1 Wheat, 1 Sheep");
 		if (GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25))) {
-			/*if(current_player.wood < 1 || current_player.brick < 1 || current_player.wheat < 1 || current_player.sheep < 1)
+			if(current_player.wood < 1 || current_player.brick < 1 || current_player.wheat < 1 || current_player.sheep < 1)
 			{
 				res_alert_exc = true;
 				hide();
-			}	*/		
+			}	
+			else
+			{
+				selectBuilding = true;
+				camera.selectedObject = null;
+				buildingName = "Settlement";
+				hide();
+			}
 		}
 		GUILayout.EndHorizontal ();
 
@@ -68,11 +123,18 @@ public class BuildDialog : MonoBehaviour {
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("City\nCost: 2 Wheat, 3 Ore");
 		if (GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25))) {
-			/*if(current_player.wheat < 2 || current_player.ore < 3)
+			if(current_player.wheat < 2 || current_player.ore < 3)
 			{
 				res_alert_exc = true;
 				hide();
-			}*/				
+			}
+			else
+			{
+				selectBuilding = true;
+				camera.selectedObject = null;
+				buildingName = "City";
+				hide();
+			}		
 		}
 
 		GUILayout.EndHorizontal ();
@@ -81,11 +143,19 @@ public class BuildDialog : MonoBehaviour {
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("Development Card\nCost: 1 Sheep, 1 Wheat, 1 Ore");
 		if (GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25))) {
-			/*if(current_player.sheep < 1 || current_player.wheat < 1 || current_player.ore < 1)
+			if(current_player.sheep < 1 || current_player.wheat < 1 || current_player.ore < 1)
 			{
 				res_alert_exc = true;
 				hide();
-			}*/			
+			}
+			else
+			{
+				current_player.ore--;
+				current_player.sheep--;
+				current_player.wheat--;
+				Deck.draw();
+				hide();
+			}	
 		}
 		GUILayout.EndHorizontal ();
 		GUILayout.Space (Screen.height * 2 / 80);

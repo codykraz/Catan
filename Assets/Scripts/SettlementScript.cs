@@ -34,17 +34,22 @@ public class SettlementScript : MonoBehaviour
 
 		player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
 		this.renderer.material.color = player.playerColor;
+		this.renderer.enabled = true;
 		player.settlementsUsed++;
 
 		this.nearbySettlement = true;
 		this.hasOwner = true;
 
-		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 12, LayerMask.NameToLayer("Settlement"));
+		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 12, 1 << LayerMask.NameToLayer("Settlement"));
+
+		Debug.Log (colliders.Length);
 
 		foreach(Collider coll in colliders)
 		{
 			coll.GetComponent<SettlementScript>().nearbySettlement = true;
 		}
+
+		updateRoads();
 
 		checkForPorts();
 
@@ -65,18 +70,21 @@ public class SettlementScript : MonoBehaviour
 		{
 			
 			player = GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>();
+			player.settlementsUsed++;
 			this.renderer.material.color = player.playerColor;
 			this.renderer.enabled = true;
 			
 			this.nearbySettlement = true;
 			this.hasOwner = true;
 			
-			Collider[] colliders = Physics.OverlapSphere(this.transform.position, 12, LayerMask.NameToLayer("Settlement"));
+			Collider[] colliders = Physics.OverlapSphere(this.transform.position, 12, 1 << LayerMask.NameToLayer("Settlement"));
 			
 			foreach(Collider coll in colliders)
 			{
 				coll.GetComponent<SettlementScript>().nearbySettlement = true;
 			}
+			
+			updateRoads();
 
 			checkForPorts();
 
@@ -104,6 +112,11 @@ public class SettlementScript : MonoBehaviour
 			player.citiesUsed++;
 			player.settlementsUsed--;
 
+			this.renderer.enabled = false;
+
+			city.SetActive(true);
+			city.renderer.material.color = player.playerColor;
+
 			this.isCity = true;
 
 			return true;
@@ -116,7 +129,9 @@ public class SettlementScript : MonoBehaviour
 
 	private void checkForPorts()
 	{
-		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, LayerMask.NameToLayer("Port"));
+		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, 1 << LayerMask.NameToLayer("Port"));
+
+		Debug.Log (colliders.Length);
 
 		foreach(Collider coll in colliders)
 		{
@@ -126,7 +141,7 @@ public class SettlementScript : MonoBehaviour
 
 	private void updateRoads()
 	{
-		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, LayerMask.NameToLayer("Port"));
+		Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, 1 << LayerMask.NameToLayer("Road"));
 
 		foreach(Collider coll in colliders)
 		{
