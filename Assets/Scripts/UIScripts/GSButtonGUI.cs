@@ -4,8 +4,8 @@ using System.Collections;
 public class GSButtonGUI : MonoBehaviour {
 	public GUISkin g;
 	float width_buffer = 20;
-	float button_height = Screen.height* 3 /25;
-	public static bool show;
+	public float button_height = Screen.height* 3 /25;
+	public bool show;
 	public static bool show_next_turn;
 	int snt_winID = 4992;
 
@@ -45,8 +45,8 @@ public class GSButtonGUI : MonoBehaviour {
 			
 			
 			if (settlement){
-				GUILayout.BeginArea(new Rect(0, Screen.height * 3.5f / 5, Screen.width, Screen.height / 5));
-				GUILayout.Box(turnController.currentPlayer +": Select a position to place a settlement");
+				GUILayout.BeginArea(new Rect(0, Screen.height -button_height, Screen.width, button_height));
+				GUILayout.Box(turnController.currentPlayer +": Select a position to place a settlement", GUILayout.ExpandHeight(true));
 				GUILayout.EndArea();
 				if(cc.selectedObject != null && cc.selectedObject.tag == "Settlement"){
 					
@@ -60,8 +60,8 @@ public class GSButtonGUI : MonoBehaviour {
 				
 			}
 			else {
-				GUILayout.BeginArea(new Rect(0, Screen.height * 3.5f / 5, Screen.width, Screen.height / 5));
-				GUILayout.Box(turnController.currentPlayer +": Select a position to place a road");
+				GUILayout.BeginArea(new Rect(0, Screen.height -button_height, Screen.width, button_height));
+				GUILayout.Box(turnController.currentPlayer +": Select a position to place a road", GUILayout.ExpandHeight(true));
 				GUILayout.EndArea();
 				if(cc.selectedObject != null && cc.selectedObject.tag == "Road"){
 					
@@ -83,7 +83,7 @@ public class GSButtonGUI : MonoBehaviour {
 			{
 				if(GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>().knightDevCard > 0)
 				{
-					if(GUI.Button(new Rect(width_buffer,Screen.height-(button_height+width_buffer),Screen.width/2-3*width_buffer/2,button_height), "Play Knight")) {
+					if(GUI.Button(new Rect(0,Screen.height-button_height,Screen.width/2,button_height), "Play Knight")) {
 
 
 						//PLAY KNIGHT
@@ -92,14 +92,10 @@ public class GSButtonGUI : MonoBehaviour {
 					}
 				}
 
-				if(GUI.Button(new Rect(Screen.width/2+width_buffer/2,Screen.height-(button_height+width_buffer),Screen.width/2-3*width_buffer/2,button_height), turnController.currentPlayer +": Roll Dice")) {
+				if(GUI.Button(new Rect(Screen.width/2,Screen.height-button_height,Screen.width/2,button_height), turnController.currentPlayer +": Roll Dice")) {
 					if(dice.roll() == 7)
 					{
 						discard();
-
-
-
-
 
 
 						//ROBBER HAPPENES
@@ -112,14 +108,13 @@ public class GSButtonGUI : MonoBehaviour {
 			}
 			else
 			{
-				// Make the first button. If it is pressed, Application.Loadlevel (1) will be executed
-				if(GUI.Button(new Rect(width_buffer,Screen.height-(button_height+width_buffer),Screen.width/2-3*width_buffer/2,button_height), "Actions")) {
+				if(GUI.Button(new Rect(0,Screen.height-button_height,Screen.width/2,button_height), "Actions")) {
 						//CALL ACTION SCREEN
 						ActionsDialog.show();
 					}
 					
 				// Make the second button.
-				if(GUI.Button(new Rect(Screen.width/2+width_buffer/2,Screen.height-(button_height+width_buffer),Screen.width/2-3*width_buffer/2,button_height), "End Turn")) {
+				if(GUI.Button(new Rect(Screen.width/2,Screen.height-button_height,Screen.width/2,button_height), "End Turn")) {
 					//CALL END TURN FUNCTION
 					turnController.nextTurn();
 

@@ -12,7 +12,7 @@ public class BuildDialog : MonoBehaviour {
 	PlayerScript current_player;
 	
 	float width_buffer = 20;
-	float button_height = 50;
+	public float button_height = Screen.height* 3 /25;
 
 	Texture AMan;
 
@@ -23,6 +23,7 @@ public class BuildDialog : MonoBehaviour {
 	public static bool res_alert_exc = false;
 
 	private TurnControllerScript turnController;
+	private GSButtonGUI gs;
 	private CameraControler camera;
 	private deck Deck;
 	
@@ -32,6 +33,7 @@ public class BuildDialog : MonoBehaviour {
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
 		camera = GameObject.Find ("Main Camera").GetComponent<CameraControler>();
 		Deck = GameObject.Find("Deck").GetComponent<deck>();
+		gs = GetComponent<GSButtonGUI> ();
 		
 	}
 	
@@ -47,11 +49,12 @@ public class BuildDialog : MonoBehaviour {
 		}
 		else if(selectBuilding)
 		{
-			GUILayout.BeginArea(new Rect(0, Screen.height * 3.5f / 5, Screen.width, Screen.height / 5));
-			GUILayout.Box("Select a position to place a " + buildingName);
+			gs.show = false;
+			GUILayout.BeginArea(new Rect(0, Screen.height -(2*button_height), Screen.width, button_height));
+			GUILayout.Box("Select a position to place a " + buildingName, GUILayout.ExpandHeight(true));
 			GUILayout.EndArea();
 
-			if(GUI.Button(new Rect(Screen.width/2+width_buffer/2,Screen.height-(button_height+width_buffer),Screen.width/2-3*width_buffer/2,button_height), "Cancel")) 
+			if(GUI.Button(new Rect(Screen.width/2,Screen.height-(button_height),Screen.width/2,button_height), "Cancel")) 
 			{
 				selectBuilding = false;
 			}
@@ -63,6 +66,9 @@ public class BuildDialog : MonoBehaviour {
 						if(camera.selectedObject.GetComponent<RoadScript>().build())
 						{
 							selectBuilding = false;
+							gs.show = true;
+							current_player.brick--;
+							current_player.wood--;
 						}
 				}
 				else if(buildingName == "Settlement" && camera.selectedObject.tag == "Settlement")
@@ -70,6 +76,11 @@ public class BuildDialog : MonoBehaviour {
 						if(camera.selectedObject.GetComponent<SettlementScript>().build())
 						{
 							selectBuilding = false;
+							gs.show = true;
+							current_player.brick--;
+							current_player.wood--;
+							current_player.sheep--;
+							current_player.wheat--;
 						}
 				}
 				else if(buildingName == "City" && camera.selectedObject.tag == "Settlement")
@@ -77,6 +88,9 @@ public class BuildDialog : MonoBehaviour {
 						if(camera.selectedObject.GetComponent<SettlementScript>().buildCity())
 						{
 							selectBuilding = false;
+							gs.show = true;
+							current_player.wheat-=2;
+							current_player.ore-=3;
 						}
 				}
 			}
@@ -93,7 +107,7 @@ public class BuildDialog : MonoBehaviour {
 		//Road
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("Road\nCost: 1 Wood, 1 Brick");
-		if (GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25))) {
+		if (!(current_player.wood < 1 || current_player.brick < 1)&&(GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25)))) {
 			if(current_player.wood < 1 || current_player.brick < 1)
 			{
 				res_alert_exc = true;
@@ -112,7 +126,7 @@ public class BuildDialog : MonoBehaviour {
 		//Settlement
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("Settlement\nCost: 1 Wood, 1 Brick, 1 Wheat, 1 Sheep");
-		if (GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25))) {
+		if (!(current_player.wood < 1 || current_player.brick < 1 || current_player.wheat < 1 || current_player.sheep < 1)&&(GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25)))) {
 			if(current_player.wood < 1 || current_player.brick < 1 || current_player.wheat < 1 || current_player.sheep < 1)
 			{
 				res_alert_exc = true;
@@ -131,7 +145,7 @@ public class BuildDialog : MonoBehaviour {
 		//City
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("City\nCost: 2 Wheat, 3 Ore");
-		if (GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25))) {
+		if (!(current_player.wheat < 2 || current_player.ore < 3)&&(GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25)))) {
 			if(current_player.wheat < 2 || current_player.ore < 3)
 			{
 				res_alert_exc = true;
@@ -151,7 +165,7 @@ public class BuildDialog : MonoBehaviour {
 		//Dev Card
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("Development Card\nCost: 1 Sheep, 1 Wheat, 1 Ore");
-		if (GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25))) {
+		if (!(current_player.sheep < 1 || current_player.wheat < 1 || current_player.ore < 1)&&(GUILayout.Button (AMan,GUILayout.Width(Screen.height* 3 /25), GUILayout.Height (Screen.height* 3 /25)))) {
 			if(current_player.sheep < 1 || current_player.wheat < 1 || current_player.ore < 1)
 			{
 				res_alert_exc = true;
