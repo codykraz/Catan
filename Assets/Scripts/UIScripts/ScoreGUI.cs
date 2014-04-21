@@ -12,6 +12,7 @@ public class ScoreGUI : MonoBehaviour {
 	private PlayerScript player4;
 
 	private PlayerScript currentPlayer;
+	private DiceRollScript die;
 
 	private TurnControllerScript turnController;
 	
@@ -24,7 +25,7 @@ public class ScoreGUI : MonoBehaviour {
 		player4 = GameObject.Find("Player4").GetComponent<PlayerScript>();
 
 		turnController = GameObject.Find("TurnController").GetComponent<TurnControllerScript>();
-
+		die = GameObject.Find ("Dice").GetComponent<DiceRollScript> ();
 
 	}
 
@@ -48,7 +49,7 @@ public class ScoreGUI : MonoBehaviour {
 		{
 			currentPlayer = player4;
 		}
-		GUI.Box (new Rect (0,0,Screen.width+10,resources_box_unit*5),"");
+		GUI.Box (new Rect (0,0,Screen.width,resources_box_unit*9),"");
 
 		GUI.contentColor = Color.white;
 		GUI.Label (new Rect (resources_box_unit*0, 0, resources_box_unit*5, resources_box_unit*5), GameObjectManager.GetTileTexture("Wood"));
@@ -62,7 +63,12 @@ public class ScoreGUI : MonoBehaviour {
 		GUI.Label (new Rect (resources_box_unit*10, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.brick.ToString()+"\nBrick");
 		GUI.Label (new Rect (resources_box_unit*15, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.wheat.ToString()+"\nWheat");
 		GUI.Label (new Rect (resources_box_unit*20, 0, resources_box_unit*5, resources_box_unit*5), currentPlayer.sheep.ToString()+"\nSheep");
-		
+
+		if (die.diceRoll != -1){
+			GUI.Label (new Rect (Screen.width-resources_box_unit*5, 0, resources_box_unit*5, resources_box_unit*5), "Roll:");
+			GUI.Label (new Rect (Screen.width-resources_box_unit*5, 0, resources_box_unit*5, resources_box_unit*5), die.diceRoll.ToString());
+		}
+
 		// Current player's score on top right
 		float score_box_width = Screen.width*1/4;
 		float score_box_unit = score_box_width/10;
@@ -70,21 +76,21 @@ public class ScoreGUI : MonoBehaviour {
 		//GUI.Box (new Rect (Screen.width - score_box_width, -5, score_box_width+5, 15+score_box_unit*17), "");
 
 		GUI.contentColor = player1.playerColor;
-		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*1, score_box_unit*4, score_box_unit*4), player1.victoryPoints.ToString());
-		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*1, score_box_unit*4, score_box_unit*4), victoryPointsTex);
+		GUI.Label (new Rect (resources_box_unit*2, resources_box_unit*5, resources_box_unit*5, resources_box_unit*5), player1.victoryPoints.ToString());
+		GUI.Label (new Rect (resources_box_unit*0, resources_box_unit*5, resources_box_unit*5, resources_box_unit*5), victoryPointsTex);
 		
 		GUI.contentColor = player2.playerColor;
-		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*5, score_box_unit*4, score_box_unit*4), player2.victoryPoints.ToString());
-		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*5, score_box_unit*4, score_box_unit*4), victoryPointsTex);
+		GUI.Label (new Rect (resources_box_unit*7, resources_box_unit*5, resources_box_unit*5, resources_box_unit*5), player2.victoryPoints.ToString());
+		GUI.Label (new Rect (resources_box_unit*5, resources_box_unit*5, resources_box_unit*5, resources_box_unit*5), victoryPointsTex);
 
 		GUI.contentColor = player3.playerColor;
-		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*9, score_box_unit*4, score_box_unit*4), player3.victoryPoints.ToString());
-		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*9, score_box_unit*4, score_box_unit*4), victoryPointsTex);
+		GUI.Label (new Rect (resources_box_unit*12, resources_box_unit*5, resources_box_unit*5, resources_box_unit*5), player3.victoryPoints.ToString());
+		GUI.Label (new Rect (resources_box_unit*10, resources_box_unit*5, resources_box_unit*5, resources_box_unit*5), victoryPointsTex);
 
 		GUI.contentColor = player4.playerColor;
-		GUI.Label (new Rect (Screen.width - score_box_unit*8, 10 + score_box_unit*13, score_box_unit*4, score_box_unit*4), player4.victoryPoints.ToString());
-		GUI.Label (new Rect (Screen.width - score_box_unit*4, 10 + score_box_unit*13, score_box_unit*4, score_box_unit*4), victoryPointsTex);
-	
+		GUI.Label (new Rect (resources_box_unit*17, resources_box_unit*5, resources_box_unit*5, resources_box_unit*5), player4.victoryPoints.ToString());
+		GUI.Label (new Rect (resources_box_unit*15, resources_box_unit*5, resources_box_unit*5, resources_box_unit*5), victoryPointsTex);
+
 		GUI.contentColor = Color.white;
 	}
 }
