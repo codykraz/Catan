@@ -51,6 +51,10 @@ public class GSButtonGUI : MonoBehaviour {
 				if(cc.selectedObject != null && cc.selectedObject.tag == "Settlement"){
 					
 					if(cc.selectedObject.GetComponent<SettlementScript>().buildInitial()){
+						if(turnController.reverse == true)
+						{
+							cc.selectedObject.GetComponent<SettlementScript>().initialResources();
+						}
 						settlement = false;
 					}
 					cc.selectedObject = null;

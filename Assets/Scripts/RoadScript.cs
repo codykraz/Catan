@@ -28,15 +28,7 @@ public class RoadScript : MonoBehaviour
 			return false;
 		}
 
-		bool b = build ();
-		if (b) {
-			Collider[] colliders = Physics.OverlapSphere(this.transform.position, 6, 1 << LayerMask.NameToLayer("Settlement"));
-			
-			foreach(Collider coll in colliders) {
-				coll.GetComponent<SettlementScript>().updateRoads(false);
-			}
-		}
-		return b;
+		return build ();
 	}
 
 	public bool build()
@@ -62,41 +54,41 @@ public class RoadScript : MonoBehaviour
 			
 			foreach(Collider coll in colliders)
 			{
-				if(turnController.currentPlayer == "Player1")
+				if(string.Equals(turnController.currentPlayer, "Player1"))
 				{
 					coll.GetComponent<SettlementScript>().Player1CanBuildHere = true;
 				}
-				else if(turnController.currentPlayer == "Player2")
+				else if(string.Equals(turnController.currentPlayer, "Player2"))
 				{
 					coll.GetComponent<SettlementScript>().Player2CanBuildHere = true;
 				}
-				else if(turnController.currentPlayer == "Player3")
+				else if(string.Equals(turnController.currentPlayer, "Player3"))
 				{
 					coll.GetComponent<SettlementScript>().Player3CanBuildHere = true;
 				}
-				else if(turnController.currentPlayer == "Player4")
+				else if(string.Equals(turnController.currentPlayer, "Player4"))
 				{
 					coll.GetComponent<SettlementScript>().Player4CanBuildHere = true;
 				}
 			}
 
-			Collider[] colliders2 = Physics.OverlapSphere(this.transform.position, 12, 1 << LayerMask.NameToLayer("Road"));
+			Collider[] colliders2 = Physics.OverlapSphere(this.transform.position, 8, 1 << LayerMask.NameToLayer("Road"));
 
 			foreach(Collider coll in colliders2)
 			{
-				if(turnController.currentPlayer == "Player1")
+				if(string.Equals(turnController.currentPlayer, "Player1"))
 				{
 					coll.GetComponent<RoadScript>().Player1CanBuildHere = true;
 				}
-				else if(turnController.currentPlayer == "Player2")
+				else if(string.Equals(turnController.currentPlayer, "Player2"))
 				{
 					coll.GetComponent<RoadScript>().Player2CanBuildHere = true;
 				}
-				else if(turnController.currentPlayer == "Player3")
+				else if(string.Equals(turnController.currentPlayer, "Player3"))
 				{
 					coll.GetComponent<RoadScript>().Player3CanBuildHere = true;
 				}
-				else if(turnController.currentPlayer == "Player4")
+				else if(string.Equals(turnController.currentPlayer, "Player4"))
 				{
 					coll.GetComponent<RoadScript>().Player4CanBuildHere = true;
 				}
