@@ -10,6 +10,8 @@ public class GSButtonGUI : MonoBehaviour {
 	int snt_winID = 4992;
 
 	private bool turnStart = true;
+	private bool rolled = false;
+	private bool playknight = false;
 
 	private TurnControllerScript turnController;
 
@@ -85,29 +87,105 @@ public class GSButtonGUI : MonoBehaviour {
 
 			if(turnStart)
 			{
-				if(GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>().knightDevCard > 0)
+				if(rolled == false)
 				{
-					if(GUI.Button(new Rect(0,Screen.height-button_height,Screen.width/2,button_height), "Play Knight")) {
+					if(playknight == true)
+					{
+						if(GUI.Button(new Rect(Screen.width/2,Screen.height-button_height,Screen.width/2,button_height), "Cancel")) {
+							playknight = false;
+						}
 
+						GUILayout.BeginArea(new Rect(0, Screen.height -button_height, Screen.width, button_height));
+						GUILayout.Box(turnController.currentPlayer +": Select a position to place the knight", GUILayout.ExpandHeight(true));
+						GUILayout.EndArea();
 
-						//PLAY KNIGHT
+						if(cc.selectedObject != null && string.Equals(cc.selectedObject.name, "Hex"))
+						{
+							if(cc.selectedObject.GetComponent<Hex>().blocked == false)
+							{
+								GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
+								
+								foreach(GameObject obj in objects)
+								{
+									if(string.Equals(obj.name, "Hex"))
+									{
+										if(obj.GetComponent<Hex>().tileType != TileType.Desert)
+										{
+											obj.GetComponent<Hex>().blocked = false;
+										}
+									}
+								}
+								
+								cc.selectedObject.GetComponent<Hex>().blocked = true;
+								GameObject robber = GameObject.Find("Robber");
+								robber.transform.position = cc.selectedObject.transform.position;
+								GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>().knightDevCard--;
+								playknight = false;
+							}
+						}
+					}
+					else
+					{
+						if(GameObject.Find(turnController.currentPlayer).GetComponent<PlayerScript>().knightDevCard > 0)
+						{
+							if(GUI.Button(new Rect(0,Screen.height-button_height,Screen.width/2,button_height), "Play Knight")) 
+							{
+								cc.selectedObject = null;
+								playknight = true;
 
+							}
+						}
 
+						if(GUI.Button(new Rect(Screen.width/2,Screen.height-button_height,Screen.width/2,button_height), turnController.currentPlayer +": Roll Dice")) {
+							if(dice.roll() == 7)
+							{
+								cc.selectedObject = null;
+								discard();
+							}
+
+							rolled = true;
+						}
 					}
 				}
-
-				if(GUI.Button(new Rect(Screen.width/2,Screen.height-button_height,Screen.width/2,button_height), turnController.currentPlayer +": Roll Dice")) {
-					if(dice.roll() == 7)
+				else
+				{
+					if(dice.diceRoll == 7)
 					{
-						discard();
+						GUILayout.BeginArea(new Rect(0, Screen.height -button_height, Screen.width, button_height));
+						GUILayout.Box(turnController.currentPlayer +": Select a position to place the robber", GUILayout.ExpandHeight(true));
+						GUILayout.EndArea();
 
+						if(cc.selectedObject != null && string.Equals(cc.selectedObject.name, "Hex"))
+						{
+							if(cc.selectedObject.GetComponent<Hex>().blocked == false)
+							{
+								GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
 
-						//ROBBER HAPPENES
+								foreach(GameObject obj in objects)
+								{
+									if(string.Equals(obj.name, "Hex"))
+									{
+										if(obj.GetComponent<Hex>().tileType != TileType.Desert)
+										{
+											obj.GetComponent<Hex>().blocked = false;
+										}
+									}
+								}
 
+								cc.selectedObject.GetComponent<Hex>().blocked = true;
+								GameObject robber = GameObject.Find("Robber");
+								robber.transform.position = cc.selectedObject.transform.position;
 
+								turnStart = false;
+								rolled = false;
+							}
+						}
 					}
-
-					turnStart = false;
+					else
+					{
+						turnStart = false;
+						rolled = false;
+					}
 				}
 			}
 			else
